@@ -9,6 +9,7 @@ models.use(Git)
 router.get('/misc/syntax-reference', _getSyntaxReference)
 router.post('/misc/preview', _postPreview)
 router.get('/misc/existence', _getExistence)
+router.get("/misc/upload", _getUploadForm)
 
 function _getSyntaxReference (req, res) {
   res.render('syntax')
@@ -18,6 +19,16 @@ function _postPreview (req, res) {
   res.render('preview', {
     content: renderer.render(req.body.data)
   })
+}
+
+function _getUploadForm(req, res) {
+  if (!res.locals.user) {
+    res.render('404', {
+      title: 'Modules'
+    });
+    return
+  }
+  res.render('upload')
 }
 
 function _getExistence (req, res) {

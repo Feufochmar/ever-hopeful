@@ -1,0 +1,18 @@
+.upload
+  form(id='wiki_upload', action=`${proxyPath}/uploadFile`, method='post', enctype='multipart/form-data')
+    .form-group
+      input.form-control(required, type='file', name='wiki_file', id='wiki_file')
+
+    .form-group
+      input.form-control(required, type='text', placeholder='Filename in repository', name='rep_file_name', id='rep_file_name')
+
+    .form-group
+      input.form-control(type='text', placeholder='Write a small message here explaining this change (optional)', name='file_message')
+
+    .form-group
+      input(type='submit', name='wiki_upload_submit', id='wiki_upload_submit', value='Upload').btn.btn-primary
+
+    #upload_status
+
+    script(src="/vendor/jquery.form.min.js")
+    script(src="/js/upload.js")
