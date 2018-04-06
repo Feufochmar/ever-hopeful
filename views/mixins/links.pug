@@ -11,3 +11,13 @@ mixin asset(url)
     link(rel="stylesheet", href=link)
   else if ext === 'js'
     script(src=link)
+
+mixin author(name, mail)
+  if config.get('features').gravatar && mail
+    img(src=gravatar().url(mail, {s:16}))
+    |&nbsp;
+
+  if config.get('features').useProfileUrl
+    a(href=`${mail}`) #{name}
+  else
+    span #{name}

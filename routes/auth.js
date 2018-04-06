@@ -8,6 +8,7 @@ var passportMastodon = require('passport-mastodon').Strategy
 var tools = require('../lib/tools')
 
 var auth = app.locals.config.get('authentication')
+var features = app.locals.config.get('features')
 
 // Additional LDAP support only if needed
 var passportLDAP
@@ -215,7 +216,19 @@ passport.deserializeUser(function (user, done) {
     user.email = 'jingouser'
   }
 
-  user.asGitAuthor = user.displayName + ' <' + user.email + '>'
+  // To be able to put links to authors, use the profile URL as the git email if the option is set
+  var gitEmail
+  if (features.useProfileUrl) {
+    if (user.profileUrl) {
+      gitEmail = user.profileUrl
+    } else {
+      gitEmail = ''
+    }
+  } else {
+    gitEmail = user.email
+  }
+  user.asGitAuthor = user.displayName + ' <' + gitEmail + '>'
+
   done(undefined, user)
 })
 

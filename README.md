@@ -371,6 +371,11 @@ Configuration options reference
 
   Whether to enable gravatar support or not
 
+#### features.useProfileUrl (boolean: false)
+
+  If set to true, the URL of the user's profile is used as the email of git commits, and are used to display a link to an author.
+  This option is not compatible with gravatar support.
+
 #### server.hostname
 
   This is the hostname used to build the URL for your wiki pages. The reason for these options to exist is due to the need for the OAuth2 authentication to work (it needs an endpoint to get back to)
