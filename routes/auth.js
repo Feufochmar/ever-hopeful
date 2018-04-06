@@ -216,6 +216,11 @@ passport.deserializeUser(function (user, done) {
     user.email = 'jingouser'
   }
 
+  // git author
+  var gitName = user.displayName
+  // Sanitize the name to remove '<' and '>' to avoid shadowing the email address
+  gitName = gitName.replace('<', '').replace('>', '')
+
   // To be able to put links to authors, use the profile URL as the git email if the option is set
   var gitEmail
   if (features.useProfileUrl) {
@@ -227,7 +232,9 @@ passport.deserializeUser(function (user, done) {
   } else {
     gitEmail = user.email
   }
-  user.asGitAuthor = user.displayName + ' <' + gitEmail + '>'
+
+  // User as git author, with name and email
+  user.asGitAuthor = gitName + ' <' + gitEmail + '>'
 
   done(undefined, user)
 })
