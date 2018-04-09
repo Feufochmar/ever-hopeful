@@ -1,5 +1,10 @@
 extends layout
 
+include mixins/form
+
+block tools
+  +tools('compare', page.wikiname)
+
 block content
 
   #js--content.compare

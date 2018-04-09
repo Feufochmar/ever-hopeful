@@ -30,7 +30,10 @@ include mixins/links
                 .input-group.input-group-sm.search
                   input.form-control(type="text", value=term_ph, data-i-search-input="true",name="term",placeholder="Search the wiki")
                   span.input-group-btn
-                    button.btn.btn-primary(type="submit") Search
+                    button.btn.btn-primary(type="submit", title="Search the wiki")
+                      i.icon.ion-search
+            .tools
+              block tools
             .navbar-right
               if isAnonymous()
                 p.user You're not&nbsp;
@@ -42,9 +45,6 @@ include mixins/links
                   b &nbsp;#{user.displayName}&nbsp;
                   +anchor('/logout')(title='Become anonymous')
                     i.icon.ion-power
-
-      .tools
-        block tools
 
       .container
 

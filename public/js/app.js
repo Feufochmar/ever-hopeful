@@ -12,7 +12,6 @@
       proxyPath = setProxyPath
 
       var navh = $('.navbar').height()
-      var $tools = $('.tools')
       var qs
       var hl = null
 
@@ -55,27 +54,6 @@
       $('#js--login').attr('href', function () {
         return $(this).attr('href').replace('destination', 'destination=' + encodeURIComponent(window.location.pathname))
       })
-
-      $('.tools').height(navh)
-
-      if ($('.tools > ul > li').length > 0) {
-        var $pah = $('<li class="tools-handle">Tools</li>')
-        var pahTo
-        var bodyPadding = $('body').css('padding-top')
-        $pah.on('mouseover', function () {
-          $tools.animate({'margin-top': bodyPadding === '40px' ? '0' : '-20'})
-          $pah.slideUp()
-        })
-        $tools.on('mouseenter', function () {
-          clearTimeout(pahTo)
-        }).on('mouseleave', function () {
-          pahTo = setTimeout(function () {
-            $tools.animate({'margin-top': '-62'})
-            $pah.slideDown()
-          }, 500)
-        })
-        $('.tools > ul').append($pah)
-      }
 
       $('.confirm-delete-page').on('click', function (evt) {
         return window.confirm('Do you really want to delete this page?')

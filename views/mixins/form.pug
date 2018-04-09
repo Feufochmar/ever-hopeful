@@ -1,42 +1,35 @@
 include links
 
 mixin tools(action, pageName)
-  if action == 'edit'
-    ul
+  ul
+    if action != 'list'
+      li
+        +anchor("/wiki")(title="All pages").btn.btn-sm.btn-primary
+          i.icon.ion-grid
+
+    if action != 'create'
+      if !isAnonymous()
+        li
+          +anchor("/pages/new")(title="Create new page").btn.btn-sm.btn-primary
+            i.icon.ion-plus-round
+
+    if (action == 'edit') || (action == 'show')
       if pageName != 'home'
         li
           form(action=`${proxyPath}/pages/${pageName}`, method="post", style="display:inline")
             input(type="hidden", name="_method", value="delete")
-            input(type="submit", value="Delete this page").confirm-delete-page.btn.btn-default
+            button(type="submit", title="Delete this page").confirm-delete-page.btn.btn-sm.btn-primary
+              i.icon.ion-trash-a
 
-  if action == 'show'
-    ul
-      if !isAnonymous()
-        li
-          +anchor("/pages/new")(title="Create new page").btn.btn-sm.btn-default
-            i.icon.ion-plus-round
+    if action == 'show'
       if !isAnonymous() && canEdit
         li
-          +anchor("/pages/" + pageName + "/edit")(title="Edit this page").btn.btn-sm.btn-default
+          +anchor("/pages/" + pageName + "/edit")(title="Edit this page").btn.btn-sm.btn-primary
             i.icon.ion-compose
 
       li
-        +anchor("/wiki/" + pageName + "/history")(title="Page history").btn.btn-sm.btn-default
+        +anchor("/wiki/" + pageName + "/history")(title="Page history").btn.btn-sm.btn-primary
           i.icon.ion-clock
-      li
-        +anchor("/wiki")(title="All pages").btn.btn-sm.btn-default
-          i.icon.ion-grid
-
-      if canSearch()
-        li
-          +anchor("/search")(title="Search through the pages").btn.btn-sm.btn-default
-            i.icon.ion-search
-
-  if action == 'history'
-    ul
-      li
-        +anchor("/wiki")(title="All pages").btn.btn-sm.btn-default
-          i.icon.ion-grid
 
 mixin saveAndCancel(saveText)
   .well
