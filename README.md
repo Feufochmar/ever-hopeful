@@ -1,18 +1,14 @@
-[![NPM](https://nodei.co/npm/jingo.png?compact=true)](https://npmjs.org/package/jingo)
+# EVER-HOPEFUL
 
-[ ![Codeship Status for claudioc/jingo](https://www.codeship.io/projects/4c413870-353e-0132-115c-220292a78f73/status)](https://www.codeship.io/projects/40997)
-
-JINGO
-=====
+> Where knowledge was found.
 
 A **git based** _wiki engine_ written for **node.js**, with a decent design, a search capability and a good typography.
 
-![Screenshot](https://cloud.githubusercontent.com/assets/166692/26024412/f0cb9206-37d0-11e7-9748-8101fc4e662f.png)
+This project started as a fork of [Jingo](https://github.com/claudioc/jingo) v1.8.5, with breaking changes.
 
 <!-- toc -->
 
-Table of contents
------------------
+## Table of contents
 
   * [Introduction](#introduction)
   * [Features](#features)
@@ -25,25 +21,20 @@ Table of contents
 
 <!-- toc stop -->
 
-Introduction
--------------
+
+## Introduction
 
 The aim of this wiki engine is to provide an easy way to create a centralized documentation area for people used to work with **git** and **markdown**. It should fit well into a development team without the burden to have to learn a complex and usually overkill application.
 
-Jingo is very much inspired by (and format-compatible with) the github own wiki system [Gollum](https://github.com/gollum/gollum), but it tries to be more a stand-alone and complete system than Gollum is.
+Ever-Hopeful is very much inspired by (and format-compatible with) the github own wiki system [Gollum](https://github.com/gollum/gollum), but it tries to be more a stand-alone and complete system than Gollum is.
 
-Think of jingo as "the github wiki, without github but with more features". "Jingo" means "Jingo is not Gollum" for more than one reason.
+Think of ever-hopeful as "the github wiki, without github but with more features".
 
-There is a demo server running at http://jingo.cica.li:6067/wiki/home
+## Features
 
-![Screenshot](https://cloud.githubusercontent.com/assets/166692/26024413/f53612c6-37d0-11e7-8dd2-01c9ed993cc6.png)
-
-Features
---------
-
-- No database: Jingo uses a git repository as the document archive
+- No database: Ever-Hopeful uses a git repository as the document archive
 - Markdown for everything, [github flavored](http://github.github.com/github-flavored-markdown/)
-- Jingo uses [Codemirror](http://codemirror.net/) or [Markitup](http://markitup.jaysalvat.com/home/) as the markup editor, with a nice (ajax) preview (see the `features` key in the config file)
+- Ever-Hopeful uses [Codemirror](http://codemirror.net/) or [Markitup](http://markitup.jaysalvat.com/home/) as the markup editor, with a nice (ajax) preview (see the `features` key in the config file)
 - It provides a "distraction free", almost full screen editing mode
 - Compatible with a wiki created with the [Gollum](https://github.com/github/gollum) wiki
 - Revision history for all the pages (with restore)
@@ -62,26 +53,24 @@ Features
 - Quite configurable, but also works out of the box
 - Works well behind a proxy (i.e.: the wiki can be "mounted" as a directory in another website)
 - Pages can be embedded into another site
-- Authentication via Google, Github, LDAP and local name/password
+- Authentication via Mastodon, Google, Github, LDAP and local name/password
 
-For code syntax highlighting, Jingo uses the `node-syntaxhighlighter` module. For the list of supported languages, please refer to [this page](https://github.com/thlorenz/node-syntaxhighlighter/tree/master/lib/scripts).
+For code syntax highlighting, Ever-Hopeful uses the `node-syntaxhighlighter` module. For the list of supported languages, please refer to [this page](https://github.com/thlorenz/node-syntaxhighlighter/tree/master/lib/scripts).
 
-![Screenshot](https://cloud.githubusercontent.com/assets/166692/26024414/f8470cb8-37d0-11e7-9c96-5193aca12591.png)
 
-Installation
-------------
+## Installation
 
-`npm install -g jingo` or download/clone the whole thing and run `npm install`.
+Download/clone the whole thing and run `yarn install`.
 
-Note: if you already have Jingo installed, please also run `npm prune` (some modules can be stale and need to be removed).
+Note: if you already have Ever-Hopeful installed, please also run `yarn prune` (some modules can be stale and need to be removed).
 
-Jingo needs a config file and to create a sample config file, just run `jingo -s`, redirect the output on a file and then edit it (`jingo -s > config.yaml`). The config file contains all the available configuration options. Be sure to provide a valid server hostname (like wiki.mycompany.com) if you use a 3rd party provider for authentication (like Google or GitHub). It is needed for them to be able to get back to you.
+Ever-Hopeful needs a config file and to create a sample config file, just run `ever-hopeful -s`, redirect the output on a file and then edit it (`ever-hopeful -s > config.yaml`). The config file contains all the available configuration options. Be sure to provide a valid server hostname (like wiki.mycompany.com) if you use a 3rd party provider for authentication (like Google or GitHub). It is needed for them to be able to get back to you.
 
 This document contains also [the reference](#configuration-options-reference) for all the possible options.
 
-If you define a `remote` to push to, then Jingo will automatically issue a push to that remote every `pushInterval` seconds. To declare a `remote` for Jingo to use, you'll need to identify the name of your local remote. The following example shows how a local remote is typically defined:
+If you define a `remote` to push to, then Ever-Hopeful will automatically issue a push to that remote every `pushInterval` seconds. To declare a `remote` for Ever-Hopeful to use, you'll need to identify the name of your local remote. The following example shows how a local remote is typically defined:
 
-`git remote add origin https://github.com/joeuser/jingorepo.git'`
+`git remote add origin https://github.com/joeuser/wikirepo.git'`
 
 Based on that example, you would update config.yaml with the remote name "origin" as follows:
 
@@ -89,13 +78,13 @@ Based on that example, you would update config.yaml with the remote name "origin
 
 You can also use the `git remote` command to get the name of your remote.
 
-You can also specify a branch using the syntax "remotename branchname". If you don't specify a branch, Jingo will use `master`. Please note that before the `push`, a `pull` will also be issued (at the moment Jingo will not try to resolve conflicts, though).
+You can also specify a branch using the syntax "remotename branchname". If you don't specify a branch, Ever-Hopeful will use `master`. Please note that before the `push`, a `pull` will also be issued (at the moment Ever-Hopeful will not try to resolve conflicts, though).
 
 The basic command to run the wiki will then be
 
-`jingo -c /path/to/config.yaml`
+`ever-hopeful -c /path/to/config.yaml`
 
-Before running jingo you need to initialise its git repository somewhere (`git init` is enough). Additionally the user running the process needs to have `git config --global user.name` and `git config --global user.email` configured. Else your document's repo will get scrambled and you have to reinitialize it again (`rm -rf .git && git init`).
+Before running ever-hopeful you need to initialise its git repository somewhere (`git init` is enough). Additionally the user running the process needs to have `git config --global user.name` and `git config --global user.email` configured. Else your document's repo will get scrambled and you have to reinitialize it again (`rm -rf .git && git init`).
 
 If you define a remote to push to, be sure that the user who'll push has the right to do so. This means you have to configure the remote via the `git://` URI that uses ssh authentication to push and have [created and published the process user's ssh public key](https://help.github.com/articles/generating-ssh-keys/) to the remote.
 
@@ -103,12 +92,9 @@ If your documents reside in subdirectory of your repository, you need to specify
 
 If you want your wiki server to only listen to your `localhost`, set the configuration key `localOnly` to true.
 
-![Screenshot](https://cloud.githubusercontent.com/assets/166692/26024415/fc211aea-37d0-11e7-9ae2-77ce32cedb07.png)
+## Authentication and Authorization
 
-Authentication and Authorization
---------------------------------
-
-You can enable the following strategies: _Google logins (OAuth2)_, _GitHub logins (OAuth2)_, _ldap logins_ or a simple, locally verified username/password credentials match (called "local").
+You can enable the following strategies: _Mastodon logins (OAuth2)_, _Google logins (OAuth2)_, _GitHub logins (OAuth2)_, _ldap logins_ or a simple, locally verified username/password credentials match (called "local").
 
 The _Google Login_ and the _GitHub login_ uses OAuth 2 and that means that on a fresh installation you need to get a `client id` and a `client secret` from Google or GitHub and put those informations in the configuration file.
 
@@ -118,9 +104,9 @@ For Google, follow these instructions (you need to be logged in in Google):
 * Create a new project (you can leave the _Project id_ as it is). This will take a little while
 * Open the _Consent screen_ page and fill in the details (particularly, the _product name_)
 * Now open _APIs & auth_ => _Credentials_ and click on _Create new client id_
-* Here you need to specify the base URL of your jingo installation. Google will fill in automatically the other field
+* Here you need to specify the base URL of your ever-hopeful installation. Google will fill in automatically the other field
   with a `/oauth2callback` URL, which is fine
-* Now you need to copy the `Client ID` and `Client secret` in your jingo config file in the proper places
+* Now you need to copy the `Client ID` and `Client secret` in your ever-hopeful config file in the proper places
 
 For GitHub, follow these instructions (you need to be logged in in GitHub):
 
@@ -130,12 +116,12 @@ For GitHub, follow these instructions (you need to be logged in in GitHub):
 * Enter <your installation URL>/auth/github/callback as the `Authorization callback URL`
 * Press the `Register application` button
 * In the following page, on the top right corner, take note of the values for `Client ID` and `Client Secret`
-* Now you need to copy the `Client ID` and `Client secret` in your jingo config file in the proper places
+* Now you need to copy the `Client ID` and `Client secret` in your ever-hopeful config file in the proper places
 
-**Warning** In certain cases the Github authentication system return an empty email and Jingo is not happy about this. To avoid problems, when using Github set the `authorization.emptyEmailMatches` configuration option to `true`.
+**Warning** In certain cases the Github authentication system return an empty email and Ever-Hopeful is not happy about this. To avoid problems, when using Github set the `authorization.emptyEmailMatches` configuration option to `true`.
 
 The _ldap_ method uses `url` as the ldap server url, and optionally a `bindDn` and `bindCredentials` if needed. The `searchBase` and `searchFilter` are required for searching in the tree. In the configuration `searchAttributes` is also available.
-Since we want to install the (binary) support to LDAP only when needed, please _manually_ `npm install passport-ldapauth` to use the LDAP support.
+Since we want to install the (binary) support to LDAP only when needed, please _manually_ `yarn install passport-ldapauth` to use the LDAP support.
 
 The _local_ method uses an array of `username`, `passwordHash` and optionally an `email`. The password is hashed using a _non salted_ SHA-1 algorithm, which makes this method not the safest in the world but at least you don't have a clear text password in the config file. To generate the hash, use the `--hash-string` program option: once you get the hash, copy it in the config file.
 
@@ -147,60 +133,57 @@ If `anonRead` is true, then anyone who can access the wiki can read anything. If
 
 `emptyEmailMatches` allows access when remote authentication providers do not provide an email address as part of user data. It defaults to `false`, but will usually need to be set to `true` for GitHub authentication (GitHub only returns email addresses that have been made public on users' GitHub accounts). It must be set to `true` for Mastodon authentication.
 
-The authentication is mandatory to edit pages from the web interface, but jingo works on a git repository; that means that you could skip the authentication altogether and edit pages with your editor and push to the remote that jingo is serving.
+The authentication is mandatory to edit pages from the web interface, but ever-hopeful works on a git repository; that means that you could skip the authentication altogether and edit pages with your editor and push to the remote that ever-hopeful is serving.
 
-Known limitations
------------------
+## Known limitations
 
-- The authentication is mandatory (no anonymous writing allowed). See also issue #4
+- The authentication is mandatory (no anonymous writing allowed).
 - The repository is "flat" (no directories or namespaces)
 - Authorization is only based on a regexp'ed white list with matches on the user email address
 - There is one authorization level only (no "administrators" and "editors")
 - No scheduled pull or fetch from the remote is provided (because handling conflicts would be a bit too... _interesting_)
 
-Please note that at the moment it is quite "risky" to have someone else, other than jingo itself, have write access to the remote / branch jingo is pushing to. The push operation is supposed to always be successfull and there is no pull or fetch. You can of course manage to handle pull requests yourself.
+Please note that at the moment it is quite "risky" to have someone else, other than ever-hopeful itself, have write access to the remote / branch ever-hopeful is pushing to. The push operation is supposed to always be successfull and there is no pull or fetch. You can of course manage to handle pull requests yourself.
 
-Customization
--------------
+## Customization
 
-You can customize jingo in four different ways:
+You can customize ever-hopeful in four different ways:
 
-- add a left sidebar to every page: just add a file named `_sidebar.md` containing the markdown you want to display to the repository. You can edit or create the sidebar from Jingo itself, visiting `/wiki/_sidebar` (note that the title of the page in this case is useless)
+- add a left sidebar to every page: just add a file named `_sidebar.md` containing the markdown you want to display to the repository. You can edit or create the sidebar from Ever-Hopeful itself, visiting `/wiki/_sidebar` (note that the title of the page in this case is useless)
 - add a footer to every page: the page you need to create is `_footer.md` and the same rules for the sidebar apply
-- add a custom CSS file, included in every page as the last file. The default name of the file is `_style.css` and it must reside in the document directory (but can stay out of the repo). It is not possible to edit the file from jingo itself
-- add a custom JavaScript file, included in every page as the last JavaScript file. The default name of the file is `_script.js` and it must reside in the document directory (but can stay out of the repo). It is not possible to edit the file from jingo itself
+- add a custom CSS file, included in every page as the last file. The default name of the file is `_style.css` and it must reside in the document directory (but can stay out of the repo). It is not possible to edit the file from ever-hopeful itself
+- add a custom JavaScript file, included in every page as the last JavaScript file. The default name of the file is `_script.js` and it must reside in the document directory (but can stay out of the repo). It is not possible to edit the file from ever-hopeful itself
 
 All these names are customizable via the `customizations` option in the config file (see [the reference](#configuration-options-reference)).
 
 Once read, all those files are cached (thus, not re-read for every page load, but kept in memory). This means that for every modification in _style.css and _script.js you need to restart the server (sorry, working on that).
 
-This is not true for the footer and the sidebar but ONLY IF you edit those pages from jingo (which in that case will clear the cache by itself).
+This is not true for the footer and the sidebar but ONLY IF you edit those pages from ever-hopeful (which in that case will clear the cache by itself).
 
-Editing
--------
+## Editing
 
-To link to another Jingo wiki page, use the Jingo Page Link Tag.
+To link to another Ever-Hopeful wiki page, use the Wiki Page Link Tag.
 
-    [[Jingo Works]]
+    [[Ever-Hopeful Works]]
 
-The above tag will create a link to the corresponding page file named `jingo-works.md`. The conversion is as follows:
+The above tag will create a link to the corresponding page file named `Ever-Hopeful-Works.md`. The conversion is as follows:
 
   1. Replace any spaces (U+0020) with dashes (U+002D)
   2. Replace any slashes (U+002F) with dashes (U+002D)
 
 If you'd like the link text to be something that doesn't map directly to the page name, you can specify the actual page name after a pipe:
 
-    [[How Jingo works|Jingo Works]]
+    [[How Ever-Hopeful works|Ever-Hopeful Works]]
 
-The above tag will link to `Jingo-Works.md` using "How Jingo Works" as the link text.
+The above tag will link to `Ever-Hopeful-Works.md` using "How Ever-Hopeful Works" as the link text.
 
-Images
-------
+## Images
 
-If you put images into the repository, Jingo will be able to serve them. You can enable Jingo to serve even other file types from the document directory: you need to change the `staticWhitelist` configuration option.
+If you put images into the repository, Ever-Hopeful will be able to serve them. You can enable Ever-Hopeful to serve even other file types from the document directory: you need to change the `staticWhitelist` configuration option.
 
-Configuration options reference
--------------------------------
+You can also upload images from ever-hopeful. Those will be placed in an `upload` directory.
+
+## Configuration options reference
 
 #### application.title (string: "Jingo")
 
@@ -208,11 +191,11 @@ Configuration options reference
 
 #### application.logo (string: "")
 
-  Supply the full URL to an image to be shown as the logo of your wiki. It will appear on the left of the page title in the navigation bar. Just set the `application.title` to an empty string to only show the Logo image. Please note that Jingo does not resize the image in any way (you can do it yourself using a custom CSS of course)
+  Supply the full URL to an image to be shown as the logo of your wiki. It will appear on the left of the page title in the navigation bar. Just set the `application.title` to an empty string to only show the Logo image. Please note that Ever-Hopeful does not resize the image in any way (you can do it yourself using a custom CSS of course)
 
 #### application.favicon (string: "")
 
-  Supply the full URL to an image to be shown as the favicon of your wiki. Please note that Jingo will try to get the mime type of the image from its extension (this can easily fail for a lot of reasons)
+  Supply the full URL to an image to be shown as the favicon of your wiki. Please note that Ever-Hopeful will try to get the mime type of the image from its extension (this can easily fail for a lot of reasons)
 
 #### application.repository (string: "")
 
@@ -224,11 +207,11 @@ Configuration options reference
 
 #### application.remote (string: "")
 
-  This is the name of the remote you want to push/pull to/from (optional). You can also specify a specific branch using the syntax “remotename branchname”. If you don’t specify a branch, Jingo will use master.
+  This is the name of the remote you want to push/pull to/from (optional). You can also specify a specific branch using the syntax “remotename branchname”. If you don’t specify a branch, Ever-Hopeful will use master.
 
 #### application.pushInterval (integer: 30)
 
-  Jingo will try to push to the remote (if present) every XX seconds
+  Ever-Hopeful will try to push to the remote (if present) every XX seconds
 
 #### application.secret (string: "change me")
 
@@ -240,15 +223,13 @@ Configuration options reference
 
 #### application.skipGitCheck (boolean: false)
 
-  Jingo will refuse to start if a version of git is found which is known to be problematic. You can still force it to start anyway, providing `true` as the value for this option
+  Ever-Hopeful will refuse to start if a version of git is found which is known to be problematic. You can still force it to start anyway, providing `true` as the value for this option
 
 #### application.loggingMode (integer: 1)
 
   Specifies how verbose the http logging should be. Accepts numeric values: `0` for no logging at all, `1` for the a combined log and `2` for a coincise, coloured log (good for development)
 
 #### application.pedanticMarkdown (boolean: true)
-
-  (the default was `false` in jingo < 1.1.0)
 
   The markdown module we use (Marked) tries to overcome some "obscure" problems with the original Perl markdown parser by default. This produces some problems when rendering HTML embedded in a markdown document (see also issue https://github.com/claudioc/jingo/issues/48). By default we now want to use the original parser and not the modified one (pedantic: true).
 
@@ -260,13 +241,13 @@ Configuration options reference
 
 #### application.proxyPath (string: "")
 
-  If you want jingo to work "behind" another website (for example in a /wiki directory of an already existing intranet), you need to configure it to be aware of that situation so that it can write all the outbound URLs accordingly. Use this option to pass it the name of the directory that you've configured in your proxy_pass option in nginx or apache. See also an nginx example in the /etc directory of the jingo source distribution.
+  If you want ever-hopeful to work "behind" another website (for example in a /wiki directory of an already existing intranet), you need to configure it to be aware of that situation so that it can write all the outbound URLs accordingly. Use this option to pass it the name of the directory that you've configured in your proxy_pass option in nginx or apache. See also an nginx example in the /etc directory of the ever-hopeful source distribution.
 
-  Please note that jingo won't work correctly if this option is activated.
+  Please note that ever-hopeful won't work correctly if this option is activated.
 
 #### authentication.staticWhitelist (string: "/\\.png$/i, /\\.jpg$/i, /\\.gif$/i")
 
-  This is to enable jingo to serve any kind of static file (like images) from the repository. By default, Jingo will serve `*.md` files and `*.jpg, *.png, *.gif`. Provide the values as a comma separated list of regular expressions.
+  This is to enable ever-hopeful to serve any kind of static file (like images) from the repository. By default, Ever-Hopeful will serve `*.md` files and `*.jpg, *.png, *.gif`. Provide the values as a comma separated list of regular expressions.
 
 #### authentication.google.enabled (boolean: true)
 
@@ -333,7 +314,7 @@ Configuration options reference
 
 #### authentication.local.[accounts].passwordHash
 
-  Use an hash of your password. Create the hash with `jingo -# yourpassword`
+  Use an hash of your password. Create the hash with `ever-hopeful -# yourpassword`
 
 #### authentication.local.[accounts].email
 
@@ -351,7 +332,7 @@ Configuration options reference
 
 #### authentication.alone.passwordHash (deprecated)
 
-  Use an hash of your password. Create the hash with `jingo -# yourpassword`
+  Use an hash of your password. Create the hash with `ever-hopeful -# yourpassword`
   _The Alone authentication option is deprecated in favor of the Local one_
 
 #### authentication.alone.email (deprecated)
@@ -373,7 +354,7 @@ Configuration options reference
 
 #### features.useProfileUrl (boolean: false)
 
-  If set to true, the URL of the user's profile is used as the email of git commits, and are used to display a link to an author.
+  If set to true, the URL of the user's profile is used as the email of git commits, and are used to display a link to the author.
   This option is not compatible with gravatar support.
 
 #### server.hostname
@@ -382,7 +363,7 @@ Configuration options reference
 
 #### server.port
 
-  Jingo will listen on this port
+  Ever-Hopeful will listen on this port
 
 #### server.localOnly
 
@@ -390,7 +371,7 @@ Configuration options reference
 
 #### server.CORS.enabled (boolean: false)
 
-  Enable or disable CORS headers for accessing a page through an ajax call from an origin which is not the one which serves Jingo. Use this option if for example you want to embed a (rendered) page inside a page of another website.
+  Enable or disable CORS headers for accessing a page through an ajax call from an origin which is not the one which serves Ever-Hopeful. Use this option if for example you want to embed a (rendered) page inside a page of another website.
 
   The configuration options for CORS are at the moment quite limited: via an Ajax call you can only read (GET) a wiki page (that is, the /wiki/NameOfYourPage path), or issue a search. Once you enable this option, all the wiki page will be accessible. Please note that no authentication check is made, which means that the Ajax calls will be denied if the `anonRead` configuration option will be `false` (all or nothing).
 
@@ -402,7 +383,7 @@ Configuration options reference
 
 #### server.baseUrl
 
-  The baseUrl is usually automatically generated by Jingo (with "//" + hostname + ":" + port), but if for some reason you need to overrideit, you can use this option
+  The baseUrl is usually automatically generated by Ever-Hopeful (with "//" + hostname + ":" + port), but if for some reason you need to overrideit, you can use this option
 
 #### authorization.anonRead (boolean: true)
 
@@ -422,19 +403,19 @@ Configuration options reference
 
 #### pages.title.fromFilename (boolean: true)
 
-  If this is true, the title of each page will be derived from the document's filename. This is how Gollum works and from Jingo 1.0 this is now the default. An important consequence of this behavior is that now Jingo is able _to rename_ documents (according to the new name it will be eventually given to), while previously it was impossible.
+  If this is true, the title of each page will be derived from the document's filename. This is how Gollum works. An important consequence of this behavior is that now Ever-Hopeful is able _to rename_ documents (according to the new name it will be eventually given to), while previously it was impossible.
 
 #### pages.title.fromContent (boolean: false)
 
-  If this is true, the title of the document will be part of the document itself (the very first line). This is the default behavior of Jingo < 1.0 and the default is now false. If you have an old installation of Jingo, please set this value to true and `fromFilename` to false.
+  If this is true, the title of the document will be part of the document itself (the very first line). This is the default behavior of Jingo < 1.0 and the default is now false. If you have an old installation of Ever-Hopeful, please set this value to true and `fromFilename` to false.
 
 #### pages.title.asciiOnly (boolean: false)
 
-  If this is set to true, Jingo will convert any non-Ascii character present in the title of the document to an ASCII equivalent (using the transliteration module), when creating the filename of the document. Default was true for Jingo < 1.0 while for Jingo >= 1.0 the default is false
+  If this is set to true, Ever-Hopeful will convert any non-Ascii character present in the title of the document to an ASCII equivalent (using the transliteration module), when creating the filename of the document. Default was true for Jingo < 1.0 while for Jingo >= 1.0 the default is false
 
 #### pages.title.lowercase (boolean: false)
 
-  If this is set to true, Jingo will lowercase any character of the title when creating the filename. Default was true for Jingo < 1.0 while for Jingo >= 1.0 the default is false
+  If this is set to true, Ever-Hopeful will lowercase any character of the title when creating the filename. Default was true for Jingo < 1.0 while for Jingo >= 1.0 the default is false
 
 #### pages.title.itemsPerPage (integer: 10)
 
