@@ -83,7 +83,7 @@ describe('namer', function () {
       expect(namer.wikify('///')).to.equal('+++')
     })
 
-    it('should wikify a string with the defaults of Jingo < 1.0', function () {
+    it('should wikify a string with given configuration', function () {
       namer.configOverride({
         pages: {
           title: {

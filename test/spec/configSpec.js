@@ -19,7 +19,7 @@ describe('Config', function () {
 
     expect(Object.keys(def).join('')).to.equal(configKeys.join(''))
 
-    expect(def.application.title).to.equal('Jingo')
+    expect(def.application.title).to.equal('Ever-Hopeful')
     expect(def.application.repository).to.equal('')
     expect(def.application.docSubdir).to.equal('')
     expect(def.application.remote).to.equal('')
@@ -97,6 +97,6 @@ describe('Config', function () {
   })
 
   it('should get a variable from the default if the config is not set up', function () {
-    expect(Config.get('application', true).title).to.equal('Jingo')
+    expect(Config.get('application', true).title).to.equal('Ever-Hopeful')
   })
 })

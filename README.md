@@ -185,7 +185,7 @@ You can also upload images from ever-hopeful. Those will be placed in an `upload
 
 ## Configuration options reference
 
-#### application.title (string: "Jingo")
+#### application.title (string: "Ever-Hopeful")
 
   This will be showed on the upper left corner of all the pages, in the main toolbar
 
@@ -399,15 +399,15 @@ You can also upload images from ever-hopeful. Those will be placed in an `upload
 
 #### pages.title.fromContent (boolean: false)
 
-  If this is true, the title of the document will be part of the document itself (the very first line). This is the default behavior of Jingo < 1.0 and the default is now false. If you have an old installation of Ever-Hopeful, please set this value to true and `fromFilename` to false.
+  If this is true, the title of the document will be part of the document itself (the very first line). If set to true, `fromFilename` should be false.
 
 #### pages.title.asciiOnly (boolean: false)
 
-  If this is set to true, Ever-Hopeful will convert any non-Ascii character present in the title of the document to an ASCII equivalent (using the transliteration module), when creating the filename of the document. Default was true for Jingo < 1.0 while for Jingo >= 1.0 the default is false
+  If this is set to true, Ever-Hopeful will convert any non-Ascii character present in the title of the document to an ASCII equivalent (using the transliteration module), when creating the filename of the document.
 
 #### pages.title.lowercase (boolean: false)
 
-  If this is set to true, Ever-Hopeful will lowercase any character of the title when creating the filename. Default was true for Jingo < 1.0 while for Jingo >= 1.0 the default is false
+  If this is set to true, Ever-Hopeful will lowercase any character of the title when creating the filename.
 
 #### pages.title.itemsPerPage (integer: 10)
 

@@ -28,12 +28,12 @@ block content
             span.nl #{match.line}
           dd #{match.text}
   else
-    .jingo-content.jingo-search
+    .ever-hopeful-content.ever-hopeful-search
         if (term)
           h2 #{title} for&nbsp;
             b.page-param #{term}
 
-        dl.jingo-search-results
+        dl.ever-hopeful-search-results
           each match in matches
             dt
               +anchor("/wiki/" + match.pageName + "?hl=" + encodeURIComponent(term), match.pageName)

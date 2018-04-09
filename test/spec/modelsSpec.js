@@ -249,7 +249,7 @@ describe('Models', function () {
       })
 
       it('should fetch the content for a page with content retrieved 2', function (done) {
-        // Not the Jingo convention for title in the content
+        // Not the convention for title in the content
         Git._content = 'Bella serata!'
 
         m = getModel('panchovilla')
@@ -272,7 +272,7 @@ describe('Models', function () {
       })
 
       it('should fetch the content for a page with content retrieved 3', function (done) {
-        // Jingo convention for title in the content
+        // Convention for title in the content
         Git._content = '# A nice title\nand some content!'
 
         m = getModel('panchovilla')

@@ -6,7 +6,7 @@
 
   var proxyPath
 
-  var Jingo = {
+  var EverHopeful = {
 
     init: function (setProxyPath) {
       proxyPath = setProxyPath
@@ -111,19 +111,19 @@
       if (/^\/pages\/.*\/edit/.test(window.location.pathname) ||
           /^\/pages\/new/.test(window.location.pathname)) {
         $('#js--editor').closest('form').on('submit', function () {
-          if (Jingo.cmInstance) {
-            Jingo.cmInstance.save()
+          if (EverHopeful.cmInstance) {
+            EverHopeful.cmInstance.save()
           }
-          window.sessionStorage.setItem('jingo-page', $('#js--editor').val())
+          window.sessionStorage.setItem('ever-hopeful-page', $('#js--editor').val())
         })
         if (window.location.search === '?e=1') {
           // Edit page in error: restore the body
-          var content = window.sessionStorage.getItem('jingo-page')
+          var content = window.sessionStorage.getItem('ever-hopeful-page')
           if (content) {
             $('#js--editor').val(content)
           }
         } else {
-          window.sessionStorage.removeItem('jingo-page')
+          window.sessionStorage.removeItem('ever-hopeful-page')
         }
       }
 
@@ -176,10 +176,10 @@
     },
 
     toggleFullscreen: function () {
-      var isFullscreen = Jingo.cmInstance.getOption('fullScreen')
+      var isFullscreen = EverHopeful.cmInstance.getOption('fullScreen')
 
-      Jingo.cmInstance.setOption('fullScreen', !Jingo.cmInstance.getOption('fullScreen'))
-      Jingo.cmInstance.focus()
+      EverHopeful.cmInstance.setOption('fullScreen', !EverHopeful.cmInstance.getOption('fullScreen'))
+      EverHopeful.cmInstance.focus()
 
       $toolbar.toggleClass('fullscreen', !isFullscreen)
     },
@@ -195,17 +195,17 @@
 
       $('ul.toolbar').on('click', 'span', function () {
         if (this.parentNode.className === 'info') {
-          Jingo.markdownSyntax()
+          EverHopeful.markdownSyntax()
         }
         if (this.parentNode.className === 'preview') {
-          Jingo.cmInstance.save()
-          Jingo.preview()
+          EverHopeful.cmInstance.save()
+          EverHopeful.preview()
         }
         if (this.parentNode.className === 'fullscreen') {
-          Jingo.toggleFullscreen()
+          EverHopeful.toggleFullscreen()
         }
         if (this.parentNode.className === 'upload') {
-          Jingo.upload();
+          EverHopeful.upload();
         }
       })
     },
@@ -240,5 +240,5 @@
     })
   }
 
-  window.Jingo = Jingo
+  window.EverHopeful = EverHopeful
 }(this, jQuery))

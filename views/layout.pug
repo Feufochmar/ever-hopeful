@@ -7,7 +7,7 @@ include mixins/links
       meta(charset="utf-8")
       if hasFavicon()
         link(rel="icon", type=faviconMimeType, href=faviconUrl)
-      meta(name="generator", content="jingo " + jingoVersion)
+      meta(name="generator", content="ever-hopeful " + everHopefulVersion)
       meta(name="viewport", content="width=device-width, initial-scale=1")
       title= title
       +asset("/vendor/bootstrap/css/bootstrap.min.css")
@@ -68,7 +68,7 @@ include mixins/links
       +asset("/vendor/bootstrap/js/bootstrap.min.js")
       +asset("/js/app.js")
       script.
-        Jingo.init("#{proxyPath}");
+        EverHopeful.init("#{proxyPath}");
       block scripts
       if hasCustomScript()
         script.

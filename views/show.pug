@@ -13,9 +13,9 @@ block content
       +warning()
       !=content
   else
-    .jingo-content.jingo-show
+    .ever-hopeful-content.ever-hopeful-show
       !=content
-  - var klass = isAjax ? 'jingo-footer' : 'footer'
+  - var klass = isAjax ? 'ever-hopeful-footer' : 'footer'
   p(class=klass) Updated by&nbsp;
     b
       +author(page.metadata.author, page.metadata.email)
