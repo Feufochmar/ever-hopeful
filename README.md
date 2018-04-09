@@ -320,26 +320,6 @@ You can also upload images from ever-hopeful. Those will be placed in an `upload
 
   If you want to use Gravatar, provide your gravatar email here.
 
-#### authentication.alone.enabled (deprecated)
-
-  Boolean, defaults to `false`
-  _The Alone authentication option is deprecated in favor of the Local one_
-
-#### authentication.alone.username (deprecated)
-
-  Provide any username you like, as a string
-  _The Alone authentication option is deprecated in favor of the Local one_
-
-#### authentication.alone.passwordHash (deprecated)
-
-  Use an hash of your password. Create the hash with `ever-hopeful -# yourpassword`
-  _The Alone authentication option is deprecated in favor of the Local one_
-
-#### authentication.alone.email (deprecated)
-
-  If you want to use Gravatar, provide your gravatar email here.
-  _The Alone authentication option is deprecated in favor of the Local one_
-
 #### features.gravatar (boolean: true)
 
   Whether to enable gravatar support or not
