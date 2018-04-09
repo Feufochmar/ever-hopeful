@@ -1,7 +1,7 @@
 {
   "apps": [{
-    "name": "jingo",
-    "script": "jingo",
+    "name": "ever-hopeful",
+    "script": "ever-hopeful",
     "args": ["-c", "config.yaml"]
   }]
 }

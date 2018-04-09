@@ -1,8 +1,8 @@
 {
-  "name": "jingo",
-  "version": "1.8.5",
-  "description": "A nodejs based wiki engine",
-  "author": "Claudio Cicali <claudio.cicali@gmail.com>",
+  "name": "ever-hopeful",
+  "version": "0.0.1",
+  "description": "A wiki using Node.js",
+  "author": "Feufochmar <feufochmar@feuforeve.fr>",
   "keywords": [
     "wiki",
     "git",
@@ -23,13 +23,13 @@
       "chai"
     ]
   },
-  "main": "jingo",
+  "main": "ever-hopeful",
   "bin": {
-    "jingo": "./jingo"
+    "jingo": "./ever-hopeful"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/claudioc/jingo"
+    "url": "https://github.com/Feufochmar/ever-hopeful"
   },
   "directories": {
     "lib": "./lib/"
@@ -73,8 +73,8 @@
   },
   "scripts": {
     "test": "node_modules/.bin/mocha test/spec",
-    "start": "./jingo -c config.yaml",
-    "start-dev": "nodemon ./jingo -c config.yaml"
+    "start": "./ever-hopeful -c config.yaml",
+    "start-dev": "nodemon ./ever-hopeful -c config.yaml"
   },
   "engines": {
     "node": ">=0.8",
