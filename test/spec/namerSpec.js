@@ -16,7 +16,6 @@ describe('namer', function () {
   })
 
   describe('wikify method', function () {
-
     it('check the default configuration', function () {
       expect(namer.getConfig().pages.title.asciiOnly).to.be.false
       expect(namer.getConfig().pages.title.lowercase).to.be.false
@@ -116,7 +115,6 @@ describe('namer', function () {
   })
 
   describe('unwikify method', function () {
-
     it('check the default configuration', function () {
       expect(namer.getConfig().pages.title.asciiOnly).to.be.false
       expect(namer.getConfig().pages.title.lowercase).to.be.false

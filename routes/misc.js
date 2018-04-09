@@ -9,7 +9,7 @@ models.use(Git)
 router.get('/misc/syntax-reference', _getSyntaxReference)
 router.post('/misc/preview', _postPreview)
 router.get('/misc/existence', _getExistence)
-router.get("/misc/upload", _getUploadForm)
+router.get('/misc/upload', _getUploadForm)
 
 function _getSyntaxReference (req, res) {
   res.render('syntax')
@@ -21,11 +21,11 @@ function _postPreview (req, res) {
   })
 }
 
-function _getUploadForm(req, res) {
+function _getUploadForm (req, res) {
   if (!res.locals.user) {
     res.render('404', {
       title: 'Modules'
-    });
+    })
     return
   }
   res.render('upload')

@@ -3,7 +3,6 @@ global.chai = require('chai')
 global.expect = chai.expect
 
 global.Git = {
-
   _content: '',
 
   absPath: function (file) {
@@ -21,4 +20,3 @@ global.Git = {
   }
 
 }
-
