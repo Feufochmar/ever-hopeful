@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
 /*
- * Jingo, wiki engine
- * http://github.com/claudioc/jingo
+ * Ever-Hopeful, wiki engine
+ * https://github.com/Feufochmar/ever-hopeful
  *
  * Copyright 2013-2017 Claudio Cicali <claudio.cicali@gmail.com>
+ * Copyright 2018 Feufochmar <feufochmar@feuforeve.fr>
+ *
  * Released under the MIT license
  */
 var program = require('commander')
@@ -85,7 +87,7 @@ function start () {
   }
 
   http.createServer(app).listen(config.get('server').port, listenAddr, function () {
-    console.log((new Date()) + ' - Jingo%sserver v%s listening on port %s', config.get('server').localOnly ? ' (local) ' : ' ', program.version(), config.get('server').port)
+    console.log((new Date()) + ' - Ever-Hopeful%sserver v%s listening on port %s', config.get('server').localOnly ? ' (local) ' : ' ', program.version(), config.get('server').port)
   })
 
   if (config.get('application').pushInterval && refspec.length > 0) {
