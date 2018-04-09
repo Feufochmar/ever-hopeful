@@ -168,11 +168,11 @@
       $('form.edit').submit()
     },
 
-    upload: function() {
-      $('#js--upload').modal({keyboard: true, show: true, backdrop: false});
-      $.get(proxyPath + '/misc/upload', function(data) {
-        $('#js--upload .modal-body').html(data).get(0).scrollTop = 0;
-      });
+    upload: function () {
+      $('#js--upload').modal({keyboard: true, show: true, backdrop: false})
+      $.get(proxyPath + '/misc/upload', function (data) {
+        $('#js--upload .modal-body').html(data).get(0).scrollTop = 0
+      })
     },
 
     toggleFullscreen: function () {
@@ -205,7 +205,7 @@
           EverHopeful.toggleFullscreen()
         }
         if (this.parentNode.className === 'upload') {
-          EverHopeful.upload();
+          EverHopeful.upload()
         }
       })
     },
