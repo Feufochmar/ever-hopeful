@@ -5,24 +5,23 @@ var namer = require('../../lib/namer')
 
 describe('namer', function () {
   beforeEach(function () {
-    namer.configOverride()
-  })
-
-  describe('configOverride method', function () {
-    it('should override some config parameters', function () {
-      expect(namer.getConfig().pages.title.asciiOnly).to.be.false
-      namer.configOverride({
-        pages: {
-          title: {
-            asciiOnly: true
-          }
+    namer.configOverride({
+      pages: {
+        title: {
+          asciiOnly: false,
+          lowercase: false
         }
-      })
-      expect(namer.getConfig().pages.title.asciiOnly).to.be.true
+      }
     })
   })
 
   describe('wikify method', function () {
+
+    it('check the default configuration', function () {
+      expect(namer.getConfig().pages.title.asciiOnly).to.be.false
+      expect(namer.getConfig().pages.title.lowercase).to.be.false
+    })
+
     it('should wikify a string with the default settings', function () {
       expect(namer.wikify('34')).to.equal('34')
       expect(namer.wikify('')).to.equal('')
@@ -44,10 +43,13 @@ describe('namer', function () {
       namer.configOverride({
         pages: {
           title: {
-            asciiOnly: true
+            asciiOnly: true,
+            lowercase: false
           }
         }
       })
+      expect(namer.getConfig().pages.title.asciiOnly).to.be.true
+      expect(namer.getConfig().pages.title.lowercase).to.be.false
 
       expect(namer.wikify('hello_Sidebar')).to.equal('hello_Sidebar')
       expect(namer.wikify('_Sidebar')).to.equal('_Sidebar')
@@ -63,10 +65,14 @@ describe('namer', function () {
       namer.configOverride({
         pages: {
           title: {
+            asciiOnly: false,
             lowercase: true
           }
         }
       })
+      expect(namer.getConfig().pages.title.asciiOnly).to.be.false
+      expect(namer.getConfig().pages.title.lowercase).to.be.true
+
       expect(namer.wikify('hello_sidebar')).to.equal('hello_sidebar')
       expect(namer.wikify('_sidebar')).to.equal('_sidebar')
       expect(namer.wikify("nell'aria")).to.equal("nell'aria")
@@ -83,16 +89,18 @@ describe('namer', function () {
       expect(namer.wikify('///')).to.equal('+++')
     })
 
-    it('should wikify a string with given configuration', function () {
+    it('should wikify a string with with asciiOnly true and lowercase true', function () {
       namer.configOverride({
         pages: {
           title: {
             asciiOnly: true,
-            replaceWs: true,
             lowercase: true
           }
         }
       })
+      expect(namer.getConfig().pages.title.asciiOnly).to.be.true
+      expect(namer.getConfig().pages.title.lowercase).to.be.true
+
       expect(namer.wikify('_Sidebar')).to.equal('_sidebar')
       expect(namer.wikify('_FOOTER')).to.equal('_footer')
       expect(namer.wikify('CoffeE')).to.equal('coffee')
@@ -108,6 +116,12 @@ describe('namer', function () {
   })
 
   describe('unwikify method', function () {
+
+    it('check the default configuration', function () {
+      expect(namer.getConfig().pages.title.asciiOnly).to.be.false
+      expect(namer.getConfig().pages.title.lowercase).to.be.false
+    })
+
     it('should unwikify a string with the default settings', function () {
       expect(namer.unwikify('34')).to.equal('34')
       expect(namer.unwikify('carne-fresca')).to.equal('carne fresca')
@@ -119,10 +133,13 @@ describe('namer', function () {
       namer.configOverride({
         pages: {
           title: {
+            asciiOnly: false,
             lowercase: true
           }
         }
       })
+      expect(namer.getConfig().pages.title.asciiOnly).to.be.false
+      expect(namer.getConfig().pages.title.lowercase).to.be.true
 
       expect(namer.unwikify('34')).to.equal('34')
       expect(namer.unwikify('disastro')).to.equal('Disastro')
@@ -131,20 +148,5 @@ describe('namer', function () {
       expect(namer.unwikify('Carne Fresca')).to.equal('Carne Fresca')
     })
 
-    it('should unwikify a string with replaceWs true', function () {
-      namer.configOverride({
-        pages: {
-          title: {
-            replaceWs: true
-          }
-        }
-      })
-
-      expect(namer.unwikify('34')).to.equal('34')
-      expect(namer.unwikify('disastro')).to.equal('disastro')
-      expect(namer.unwikify('carne-fresca')).to.equal('carne fresca')
-      expect(namer.unwikify('carne fresca')).to.equal('carne fresca')
-      expect(namer.unwikify('Carne Fresca')).to.equal('Carne Fresca')
-    })
   })
 })
