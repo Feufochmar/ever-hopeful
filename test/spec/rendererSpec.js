@@ -2,8 +2,21 @@
 /* global expect */
 
 var Renderer = require('../../lib/renderer')
+var namer = require('../../lib/namer')
 
 describe('Renderer', function () {
+  // To have the right configuration in namer
+  beforeEach(function () {
+    namer.configOverride({
+      pages: {
+        title: {
+          asciiOnly: false,
+          lowercase: false
+        }
+      }
+    })
+  })
+
   it('should render bracket tags1', function () {
     var text = 'a [[Foo]] b'
     expect(Renderer.render(text)).to.be.equal('<p>a <a class="internal" href="/wiki/Foo">Foo</a> b</p>\n')
