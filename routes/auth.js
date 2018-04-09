@@ -213,7 +213,7 @@ passport.deserializeUser(function (user, done) {
   }
 
   if (!user.email) {
-    user.email = 'jingouser'
+    user.email = 'no.email.user'
   }
 
   // git author

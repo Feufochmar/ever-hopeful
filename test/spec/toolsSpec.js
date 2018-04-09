@@ -15,10 +15,10 @@ describe('Tools', function () {
     expect(Tools.isAuthorized(null)).to.equal(false)
   })
 
-  it("should authorize with 'jingouser'", function () {
-    expect(Tools.isAuthorized('jingouser')).to.equal(false)
-    expect(Tools.isAuthorized('jingouser', '', true)).to.equal(true)
-    expect(Tools.isAuthorized('jingouser', '', false)).to.equal(false)
+  it("should authorize with 'no.email.user'", function () {
+    expect(Tools.isAuthorized('no.email.user')).to.equal(false)
+    expect(Tools.isAuthorized('no.email.user', '', true)).to.equal(true)
+    expect(Tools.isAuthorized('no.email.user', '', false)).to.equal(false)
   })
 
   it('should authorize with empty pattern', function () {
