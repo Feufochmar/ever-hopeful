@@ -108,8 +108,8 @@ if (auth.ldap.enabled) {
     failureFlash: true
   }))
 
-  passport.use(new passportLDAP(function(req, callback) {
-    process.nextTick(function() {
+  passport.use(new passportLDAP(function (req, callback) {
+    process.nextTick(function () {
       var bindDn = auth.ldap.bindDn.replace(/{{username}}/g, req.body.username)
       var bindCredentials = auth.ldap.bindCredentials.replace(/{{password}}/g, req.body.password)
 
@@ -124,7 +124,7 @@ if (auth.ldap.enabled) {
           }
       }
 
-      callback(null, opts);
+      callback(null, opts)
     })
   },
     function (profile, done) {

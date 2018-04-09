@@ -105,7 +105,6 @@ function _getWikiPage (req, res) {
           res.locals.title = '404 - Not found'
           res.statusCode = 404
           res.render('404.pug')
-          return
         }
       }
     }
@@ -144,7 +143,6 @@ function _getCompare (req, res) {
       res.locals.title = '404 - Not found'
       res.statusCode = 404
       res.render('404.pug')
-      return
     }
   })
 
