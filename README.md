@@ -34,7 +34,7 @@ Think of ever-hopeful as "the github wiki, without github but with more features
 
 - No database: Ever-Hopeful uses a git repository as the document archive
 - Markdown for everything, [github flavored](http://github.github.com/github-flavored-markdown/)
-- Ever-Hopeful uses [Codemirror](http://codemirror.net/) or [Markitup](http://markitup.jaysalvat.com/home/) as the markup editor, with a nice (ajax) preview (see the `features` key in the config file)
+- Ever-Hopeful uses [Codemirror](http://codemirror.net/) as the markup editor, with a nice (ajax) preview (see the `features` key in the config file)
 - It provides a "distraction free", almost full screen editing mode
 - Compatible with a wiki created with the [Gollum](https://github.com/github/gollum) wiki
 - Revision history for all the pages (with restore)
@@ -339,14 +339,6 @@ You can also upload images from ever-hopeful. Those will be placed in an `upload
 
   If you want to use Gravatar, provide your gravatar email here.
   _The Alone authentication option is deprecated in favor of the Local one_
-
-#### features.markitup (boolean: false)
-
-  DEPRECATED: markitup support has been removed as of version 1.8.0
-
-#### features.codemirror (boolean: true)
-
-  Whether to enable Codemirror or not.
 
 #### features.gravatar (boolean: true)
 
