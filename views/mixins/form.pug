@@ -4,7 +4,7 @@ mixin removePage(pageName, origin)
   form(action=`${proxyPath}/pages/${pageName}`, method='post', style='display:inline')
     input(type='hidden', name='_method', value='delete')
     input(type='hidden', name='origin', value=`${origin}`)
-    button(type="submit", title="Delete this page")&attributes(attributes)
+    button(type='submit', title='Delete this page')&attributes(attributes)
       i.icon.ion-trash-a
 
 mixin tools(action, pageName)
@@ -35,6 +35,21 @@ mixin tools(action, pageName)
       li
         +anchor("/wiki/" + pageName + "/history")(title="Page history").btn.btn-sm.btn-primary
           i.icon.ion-clock
+
+mixin editToolbar()
+  ul.toolbar
+    li.fullscreen
+      button(type='button', title='Toggle fullscreen (Ctrl/Cmd+Enter)').btn.btn-default
+        i.icon.ion-arrow-expand
+    li.upload
+      button(type='button', title='Upload').btn.btn-default
+        i.icon.ion-upload
+    li.info
+      button(type='button', title='Syntax help').btn.btn-default
+        i.icon.ion-information-circled
+    li.preview
+      button(type='button', title='Preview').btn.btn-default
+        i.icon.ion-eye
 
 mixin saveAndCancel(saveText)
   .well

@@ -6,8 +6,9 @@ block tools
 
 block content
   #js--content.show
-    +notice()
+    +errors()
     +warning()
+    +notice()
     h1 Document list – Most recent updates shown first
     ul.doc-list
       each item in items

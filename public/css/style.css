@@ -429,51 +429,32 @@ ul.doc-list > li .message {
   display: inline-block;
 }
 
-.page-actions li :hover {
-  color: #4183c4;
-  background-color: #fff;
-}
-
-.page-actions .btn {
+.page-actions a {
   font-size: 18px;
   padding: 0 10px;
   margin-bottom: -3px;
-  background-color: #f5f5f5;
+}
+
+.page-actions button {
+  font-size: 18px;
+  padding: 0 10px;
+  margin-bottom: -3px;
 }
 
 .toolbar {
   padding: 0;
   margin: 0;
-  text-align: right
+  text-align: right;
 }
 
 .toolbar li {
   list-style-type: none;
   display: inline-block;
-  margin-right: 8px;
-  width: 16px;
-  height: 16px;
 }
 
-.toolbar li span {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-  background-repeat: no-repeat;
-}
-
-.toolbar li.fullscreen span {
-  background-image:url(../img/fullscreen_16.png);
-}
-.toolbar li.info span {
-  background-image:url(../img/info_16.png);
-}
-.toolbar li.preview span {
-  background-image:url(../img/preview_16.png);
-}
-.toolbar li.upload span {
-  background-image:url(../img/upload_16.png);
+.toolbar button {
+  font-size: 18px;
+  padding: 0 10px;
 }
 
 .toolbar.fullscreen {

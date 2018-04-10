@@ -9,10 +9,10 @@ block tools
   +tools('edit', page.wikiname)
 
 block content
-
   #js--content.edit
     +errors()
     +warning()
+    +notice()
     h1 Edit page
 
     form(action=page.urlForEditPut(), method='post', class='edit')
@@ -22,6 +22,7 @@ block content
         input(type="hidden", name="_method", value="put")
 
       .form-group
+        +editToolbar()
         textarea.form-control(name="content", rows=25)#js--editor #{coalesce(formData.content, '')}
 
       .form-group

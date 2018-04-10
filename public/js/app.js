@@ -2,8 +2,6 @@
 !(function (window, $, undefined) { // eslint-disable-line
   var cheatsheetShown = false
 
-  var $toolbar
-
   var proxyPath
 
   var EverHopeful = {
@@ -159,30 +157,22 @@
       EverHopeful.cmInstance.setOption('fullScreen', !EverHopeful.cmInstance.getOption('fullScreen'))
       EverHopeful.cmInstance.focus()
 
-      $toolbar.toggleClass('fullscreen', !isFullscreen)
+      $('ul.toolbar').toggleClass('fullscreen', !isFullscreen)
     },
 
     toolbar: function () {
-      $toolbar = $("<ul class='toolbar'>")
-      /* eslint-disable */
-      $toolbar.append('<li title="Toggle fullscreen (Ctrl/Cmd+Enter)" class="fullscreen"><span></span></li>\
-        <li title="Upload" class="upload"><span></span></li>\
-        <li title="Syntax help" class="info"><span></span></li>\
-        <li title="Preview" class="preview"><span></span></li></ul>').insertBefore($('form.edit textarea:first').closest('div'))
-      /* eslint-enable */
-
-      $('ul.toolbar').on('click', 'span', function () {
-        if (this.parentNode.className === 'info') {
+      $('ul.toolbar').on('click', 'li', function () {
+        if (this.className === 'info') {
           EverHopeful.markdownSyntax()
         }
-        if (this.parentNode.className === 'preview') {
+        if (this.className === 'preview') {
           EverHopeful.cmInstance.save()
           EverHopeful.preview()
         }
-        if (this.parentNode.className === 'fullscreen') {
+        if (this.className === 'fullscreen') {
           EverHopeful.toggleFullscreen()
         }
-        if (this.parentNode.className === 'upload') {
+        if (this.className === 'upload') {
           EverHopeful.upload()
         }
       })
