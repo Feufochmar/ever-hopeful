@@ -221,7 +221,6 @@ passport.deserializeUser(function (user, done) {
 
 function _getLogout (req, res) {
   req.logout()
-  req.session = null
   res.redirect(proxyPath + '/')
 }
 
@@ -237,7 +236,6 @@ function _getAuthDone (req, res) {
                           app.locals.config.get('authorization').validMatches,
                           app.locals.config.get('authorization').emptyEmailMatches)) {
     req.logout()
-    req.session = null
     res.statusCode = 403
     res.end('<h1>Forbidden</h1>')
   } else {
