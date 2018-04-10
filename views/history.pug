@@ -28,7 +28,8 @@ block content
               |[
               a(href=`${page.urlForShow()}/${item.hashRef}`) CURRENT
               |]
-          td.revert
-            if item.hashRef
-              a(href=`${page.urlForRevert()}/${item.fullhash}`, title="Revert to this version").confirm-revert
-                i.icon.ion-arrow-graph-up-left
+          if !isAnonymous()
+            td.revert
+              if item.hashRef
+                a(href=`${page.urlForRevert()}/${item.fullhash}`, title="Revert to this version").confirm-revert
+                  i.icon.ion-arrow-graph-up-left
