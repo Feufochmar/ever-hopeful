@@ -389,17 +389,6 @@ ul.doc-list > li .message {
   padding: 10px;
 }
 
-.page-actions {
-  float: right;
-  margin: 8px 10px 10px 0;
-  padding: 0;
-}
-
-.page-actions li {
-  list-style-type: none;
-  display: inline-block;
-}
-
 .doc-list .page-actions a {
   font-size: 18px
 }
@@ -429,15 +418,27 @@ ul.doc-list > li .message {
   padding: 0 10px;
 }
 
-.page-actions a.btn {
+.page-actions {
+  float: right;
+  margin: 8px 10px 10px 0;
+  padding: 0;
+}
+
+.page-actions li {
+  list-style-type: none;
+  display: inline-block;
+}
+
+.page-actions li :hover {
+  color: #4183c4;
+  background-color: #fff;
+}
+
+.page-actions .btn {
   font-size: 18px;
   padding: 0 10px;
   margin-bottom: -3px;
   background-color: #f5f5f5;
-}
-
-.page-actions a.hover {
-  color: #4183c4;
 }
 
 .toolbar {

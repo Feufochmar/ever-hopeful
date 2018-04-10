@@ -22,9 +22,16 @@ var proxyPath = app.locals.config.getProxyPath()
 function _deletePages (req, res) {
   var page = new models.Page(req.params.page)
 
+  var redirectURL
+  if (req.body && req.body.origin === 'list') {
+    redirectURL = proxyPath + '/wiki'
+  } else {
+    redirectURL = proxyPath + '/'
+  }
+
   if (page.isIndex() || !page.exists()) {
     req.session.notice = 'The page cannot be deleted.'
-    res.redirect(proxyPath + '/')
+    res.redirect(redirectURL)
     return
   }
 
@@ -42,7 +49,7 @@ function _deletePages (req, res) {
     }
 
     req.session.notice = 'The page `' + page.wikiname + '` has been deleted.'
-    res.redirect(proxyPath + '/')
+    res.redirect(redirectURL)
   })
 }
 

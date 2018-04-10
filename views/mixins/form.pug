@@ -1,5 +1,12 @@
 include links
 
+mixin removePage(pageName, origin)
+  form(action=`${proxyPath}/pages/${pageName}`, method='post', style='display:inline')
+    input(type='hidden', name='_method', value='delete')
+    input(type='hidden', name='origin', value=`${origin}`)
+    button(type="submit", title="Delete this page")&attributes(attributes)
+      i.icon.ion-trash-a
+
 mixin tools(action, pageName)
   ul
     if action != 'list'
@@ -13,20 +20,18 @@ mixin tools(action, pageName)
           +anchor("/pages/new")(title="Create new page").btn.btn-sm.btn-primary
             i.icon.ion-plus-round
 
-    if (action == 'edit') || (action == 'show')
-      if pageName != 'home'
-        li
-          form(action=`${proxyPath}/pages/${pageName}`, method="post", style="display:inline")
-            input(type="hidden", name="_method", value="delete")
-            button(type="submit", title="Delete this page").confirm-delete-page.btn.btn-sm.btn-primary
-              i.icon.ion-trash-a
-
     if action == 'show'
       if !isAnonymous() && canEdit
         li
           +anchor("/pages/" + pageName + "/edit")(title="Edit this page").btn.btn-sm.btn-primary
             i.icon.ion-compose
 
+    if (action == 'edit') || (action == 'show')
+      if !isAnonymous() && (pageName != indexPage())
+        li
+          +removePage(pageName, 'tools')(class='confirm-delete-page btn btn-sm btn-primary')
+
+    if action == 'show'
       li
         +anchor("/wiki/" + pageName + "/history")(title="Page history").btn.btn-sm.btn-primary
           i.icon.ion-clock
