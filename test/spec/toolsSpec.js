@@ -4,8 +4,11 @@
 var Tools = require('../../lib/tools')
 
 describe('Tools', function () {
-  it('should hashify a string with sha1', function () {
-    expect(Tools.hashify('tornado')).to.equal('474446ad24ee5490f8e879012ee2a855a7c7bf56')
+  it('should hashify a string with a salt', function () {
+    expect(Tools.hashify(
+      'tornado',
+      'hurricane'
+    )).to.equal('3d0ccfb18b53036fac0d42ed4d36d5c6f194bef7cb125cec8dc80d330933e2a02badeafa56bbb3a2c89b4e30015a00460154e11ff040b557379d9a817868f4e7')
   })
 
   it('should not authorize empty email', function () {

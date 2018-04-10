@@ -139,7 +139,7 @@ if (auth.local.enabled) {
 
     function (username, password, done) {
       var wantedUsername = username.toLowerCase().trim()
-      var wantedPasswordHash = tools.hashify(password)
+      var wantedPasswordHash = tools.hashify(password, app.locals.config.get('application').secret)
 
       var foundUser = _.find(auth.local.accounts, function (account) {
         return account.username.toLowerCase() === wantedUsername &&
