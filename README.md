@@ -34,7 +34,7 @@ Think of ever-hopeful as "the github wiki, without github but with more features
 
 - No database: Ever-Hopeful uses a git repository as the document archive
 - Markdown for everything, [github flavored](http://github.github.com/github-flavored-markdown/)
-- Ever-Hopeful uses [Codemirror](http://codemirror.net/) as the markup editor, with a nice (ajax) preview (see the `features` key in the config file)
+- Ever-Hopeful uses [Codemirror](http://codemirror.net/) as the markup editor, with a nice (ajax) preview
 - It provides a "distraction free", almost full screen editing mode
 - Compatible with a wiki created with the [Gollum](https://github.com/github/gollum) wiki
 - Revision history for all the pages (with restore)
@@ -43,7 +43,6 @@ Think of ever-hopeful as "the github wiki, without github but with more features
 - Search through the content _and_ the page names
 - Page layout accepts custom sidebar and footer
 - Gravatar support
-- Can include IFRAMEs in the document (es: embed a Google Drive document)
 - Generate Table of Contents for pages
 - Can use custom CSS and JavaScript scripts
 - White list for authorization on page reading and writing
