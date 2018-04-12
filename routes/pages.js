@@ -116,7 +116,7 @@ function _postPages (req, res) {
 
   if (page.exists()) {
     req.session.errors = [{msg: 'A document with this title already exists'}]
-    res.redirect(page.urlFor('new'))
+    res.redirect(page.urlForNew())
     return
   }
 
@@ -272,7 +272,7 @@ function _getRevert (req, res) {
   page.fetch().then(function () {
     if (!page.error) {
       page.revert()
-      res.redirect(page.urlFor('history'))
+      res.redirect(page.urlForHistory())
     } else {
       res.locals.title = '500 – Internal Server Error'
       res.statusCode = 500

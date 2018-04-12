@@ -100,45 +100,18 @@ describe('Models', function () {
     })
 
     describe('UrlFor method', function () {
-      it('should generate the correct url for page actions when a proxypath is not set', function () {
-        var Page = models.Page
-        var pname = 'verguenza'
-
-        expect(Page.urlFor(pname, 'show')).to.equal('/wiki/verguenza')
-        expect(Page.urlFor(pname, 'edit')).to.equal('/pages/verguenza/edit')
-        expect(Page.urlFor(pname, 'edit error')).to.equal('/pages/verguenza/edit?e=1')
-        expect(Page.urlFor(pname, 'edit put')).to.equal('/pages/verguenza')
-        expect(Page.urlFor(pname, 'history')).to.equal('/wiki/verguenza/history')
-        expect(Page.urlFor(pname, 'compare')).to.equal('/wiki/verguenza/compare')
-        expect(Page.urlFor(pname, 'new')).to.equal('/pages/new/verguenza')
-        expect(Page.urlFor(pname, 'new error')).to.equal('/pages/new/verguenza?e=1')
-      })
-
-      it('should generate the correct url for page actions when a proxypath is set', function () {
-        var Page = models.Page
-        var pname = 'verguenza'
-
-        expect(Page.urlFor(pname, 'show', '/bazinga')).to.equal('/bazinga/wiki/verguenza')
-        expect(Page.urlFor(pname, 'edit', '/bazinga')).to.equal('/bazinga/pages/verguenza/edit')
-        expect(Page.urlFor(pname, 'edit error', '/bazinga')).to.equal('/bazinga/pages/verguenza/edit?e=1')
-        expect(Page.urlFor(pname, 'edit put', '/bazinga')).to.equal('/bazinga/pages/verguenza')
-        expect(Page.urlFor(pname, 'history', '/bazinga')).to.equal('/bazinga/wiki/verguenza/history')
-        expect(Page.urlFor(pname, 'compare', '/bazinga')).to.equal('/bazinga/wiki/verguenza/compare')
-        expect(Page.urlFor(pname, 'new', '/bazinga')).to.equal('/bazinga/pages/new/verguenza')
-        expect(Page.urlFor(pname, 'new error', '/bazinga')).to.equal('/bazinga/pages/new/verguenza?e=1')
-      })
-
       it('should generate the correct url for page actions', function () {
         m = getModel('chupito')
 
-        expect(m.urlFor('show')).to.equal('/wiki/chupito')
-        expect(m.urlFor('edit')).to.equal('/pages/chupito/edit')
-        expect(m.urlFor('edit error')).to.equal('/pages/chupito/edit?e=1')
-        expect(m.urlFor('edit put')).to.equal('/pages/chupito')
-        expect(m.urlFor('history')).to.equal('/wiki/chupito/history')
-        expect(m.urlFor('compare')).to.equal('/wiki/chupito/compare')
-        expect(m.urlFor('new')).to.equal('/pages/new/chupito')
-        expect(m.urlFor('new error')).to.equal('/pages/new/chupito?e=1')
+        expect(m.urlForShow()).to.equal('/wiki/chupito')
+        expect(m.urlForEdit()).to.equal('/pages/edit/chupito')
+        expect(m.urlForEditWithError()).to.equal('/pages/edit/chupito?e=1')
+        expect(m.urlForEditPut()).to.equal('/pages/chupito')
+        expect(m.urlForNew()).to.equal('/pages/new/chupito')
+        expect(m.urlForNewWithError()).to.equal('/pages/new/chupito?e=1')
+        expect(m.urlForRevert()).to.equal('/pages/chupito/revert')
+        expect(m.urlForHistory()).to.equal('/wiki/chupito/history')
+        expect(m.urlForCompare()).to.equal('/wiki/chupito/compare')
       })
 
       it('should generate the correct url for page actions with a set proxypath', function () {
@@ -150,14 +123,15 @@ describe('Models', function () {
           }
         })
 
-        expect(m.urlFor('show')).to.equal('/lovely/wiki/chupito')
-        expect(m.urlFor('edit')).to.equal('/lovely/pages/chupito/edit')
-        expect(m.urlFor('edit error')).to.equal('/lovely/pages/chupito/edit?e=1')
-        expect(m.urlFor('edit put')).to.equal('/lovely/pages/chupito')
-        expect(m.urlFor('history')).to.equal('/lovely/wiki/chupito/history')
-        expect(m.urlFor('compare')).to.equal('/lovely/wiki/chupito/compare')
-        expect(m.urlFor('new')).to.equal('/lovely/pages/new/chupito')
-        expect(m.urlFor('new error')).to.equal('/lovely/pages/new/chupito?e=1')
+        expect(m.urlForShow()).to.equal('/lovely/wiki/chupito')
+        expect(m.urlForEdit()).to.equal('/lovely/pages/edit/chupito')
+        expect(m.urlForEditWithError()).to.equal('/lovely/pages/edit/chupito?e=1')
+        expect(m.urlForEditPut()).to.equal('/lovely/pages/chupito')
+        expect(m.urlForNew()).to.equal('/lovely/pages/new/chupito')
+        expect(m.urlForNewWithError()).to.equal('/lovely/pages/new/chupito?e=1')
+        expect(m.urlForRevert()).to.equal('/lovely/pages/chupito/revert')
+        expect(m.urlForHistory()).to.equal('/lovely/wiki/chupito/history')
+        expect(m.urlForCompare()).to.equal('/lovely/wiki/chupito/compare')
       })
     })
 

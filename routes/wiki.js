@@ -94,7 +94,7 @@ function _getWikiPage (req, res) {
         if (/but not in 'HEAD'/.test(page.error)) {
           page.setNames(page.name.slice(0, 1).toUpperCase() + page.name.slice(1))
         }
-        res.redirect(page.urlFor('new'))
+        res.redirect(page.urlForNew())
       } else {
         // Special case for the index page, anonymous user and an empty docbase
         if (page.isIndex()) {
