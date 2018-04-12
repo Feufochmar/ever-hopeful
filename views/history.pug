@@ -26,10 +26,10 @@ block content
               a(href=`${page.urlForShow()}/${item.hashRef}`) #{item.hashRef}
             else
               |[
-              a(href=`${page.urlForShow()}/${item.hashRef}`) CURRENT
+              a(href=`${page.urlForShow()}`) CURRENT
               |]
           if !isAnonymous()
             td.revert
               if item.hashRef
-                a(href=`${page.urlForRevert()}/${item.fullhash}`, title="Revert to this version").confirm-revert
+                a(href=`${page.urlForRevert(item.fullhash)}`, title="Revert to this version").confirm-revert
                   i.icon.ion-arrow-graph-up-left

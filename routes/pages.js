@@ -14,7 +14,7 @@ router.get('/pages/edit/:page', _getPagesEdit)
 router.post('/pages', _postPages)
 router.put('/pages/:page', _putPages)
 router.delete('/pages/:page', _deletePages)
-router.get('/pages/:page/revert/:version', _getRevert)
+router.get('/pages/revert/:version/:page', _getRevert)
 
 var pagesConfig = app.locals.config.get('pages')
 var proxyPath = app.locals.config.getProxyPath()
