@@ -168,7 +168,7 @@ To link to another Ever-Hopeful wiki page, use the Wiki Page Link Tag.
 The above tag will create a link to the corresponding page file named `Ever-Hopeful-Works.md`. The conversion is as follows:
 
   1. Replace any spaces (U+0020) with dashes (U+002D)
-  2. Replace any slashes (U+002F) with dashes (U+002D)
+  2. Replace any slashes (U+002F) with pluses (U+002B)
 
 If you'd like the link text to be something that doesn't map directly to the page name, you can specify the actual page name after a pipe:
 
