@@ -200,9 +200,13 @@ You can also upload images from ever-hopeful. Those will be placed in an `upload
 
   Absolute path for your documents repository (mandatory).
 
-#### application.docSubdir (string: "")
+#### application.docSubdir (string: "docs")
 
-  If your documents reside inside a directory of the repository, specify its name here.
+  The name of the directory inside which the documents reside.
+
+#### application.uploadSubdir (string: "uploads")
+
+  The name of the directory inside which the uploaded files reside.
 
 #### application.remote (string: "")
 

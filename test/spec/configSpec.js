@@ -21,7 +21,8 @@ describe('Config', function () {
 
     expect(def.application.title).to.equal('Ever-Hopeful')
     expect(def.application.repository).to.equal('')
-    expect(def.application.docSubdir).to.equal('')
+    expect(def.application.docSubdir).to.equal('docs')
+    expect(def.application.uploadSubdir).to.equal('uploads')
     expect(def.application.remote).to.equal('')
     expect(def.application.pushInterval).to.equal(30)
     expect(def.application.secret).to.equal('change me')
