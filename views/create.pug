@@ -26,7 +26,7 @@ block content
         +editToolbar()
         textarea.form-control(name="content", rows=25)#js--editor #{coalesce(formData.content, '')}
 
-      +saveAndCancel()
+      +saveAndCancel('/')
 
   #js--preview(tabindex="-1",role="dialog",aria-hidden="true").modal
     +dialogBox("Page preview")

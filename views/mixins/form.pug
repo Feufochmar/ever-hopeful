@@ -23,7 +23,7 @@ mixin tools(action, pageName)
     if action == 'show'
       if !isAnonymous() && canEdit
         li
-          +anchor("/pages/" + pageName + "/edit")(title="Edit this page").btn.btn-sm.btn-primary
+          +anchor("/pages/edit/" + pageName)(title="Edit this page").btn.btn-sm.btn-primary
             i.icon.ion-compose
 
     if (action == 'edit') || (action == 'show')
@@ -51,11 +51,11 @@ mixin editToolbar()
       button(type='button', title='Preview').btn.btn-default
         i.icon.ion-eye
 
-mixin saveAndCancel(saveText)
+mixin saveAndCancel(pageFrom)
   .well
-    input(type='submit',value=saveText || 'Save',title='Save (Ctrl/Cmd+s)').btn.btn-primary
+    input(type='submit',value='Save',title='Save (Ctrl/Cmd+s)').btn.btn-primary
     |&nbsp;
-    +anchor("/", "Cancel").btn
+    +anchor(pageFrom, "Cancel").btn
 
 mixin errors(err)
   -var errors = locals.errors;

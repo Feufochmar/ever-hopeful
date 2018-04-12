@@ -28,7 +28,7 @@ block content
       .form-group
         input.form-control(type='text', name='message', placeholder='Write a small message here explaining this change (optional)')#message.span8
 
-      +saveAndCancel()
+      +saveAndCancel(page.urlForShow())
 
   #js--preview(tabindex="-1",role="dialog",aria-hidden="true").modal
     +dialogBox("Page preview")
