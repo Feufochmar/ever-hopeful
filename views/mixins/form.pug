@@ -1,13 +1,13 @@
 include links
 
-mixin removePage(pageName, origin)
-  form(action=`${proxyPath}/pages/${pageName}`, method='post', style='display:inline')
+mixin removePage(page, origin)
+  form(action=`${page.urlForDelete()}`, method='post', style='display:inline')
     input(type='hidden', name='_method', value='delete')
     input(type='hidden', name='origin', value=`${origin}`)
     button(type='submit', title='Delete this page')&attributes(attributes)
       i.icon.ion-trash-a
 
-mixin tools(action, pageName)
+mixin tools(action, page)
   ul
     if action != 'list'
       li
@@ -23,17 +23,17 @@ mixin tools(action, pageName)
     if action == 'show'
       if !isAnonymous() && canEdit
         li
-          +anchor("/pages/edit/" + pageName)(title="Edit this page").btn.btn-sm.btn-primary
+          +anchor(page.urlForEdit())(title="Edit this page").btn.btn-sm.btn-primary
             i.icon.ion-compose
 
     if (action == 'edit') || (action == 'show')
-      if !isAnonymous() && (pageName != indexPage())
+      if !isAnonymous() && (page.name != indexPage())
         li
-          +removePage(pageName, 'tools')(class='confirm-delete-page btn btn-sm btn-primary')
+          +removePage(page, 'tools')(class='confirm-delete-page btn btn-sm btn-primary')
 
     if action == 'show'
       li
-        +anchor("/wiki/" + pageName + "/history")(title="Page history").btn.btn-sm.btn-primary
+        +anchor(page.urlForHistory())(title="Page history").btn.btn-sm.btn-primary
           i.icon.ion-clock
 
 mixin editToolbar()

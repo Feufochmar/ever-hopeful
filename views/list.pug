@@ -2,7 +2,7 @@ extends layout
 include mixins/form
 
 block tools
-  +tools('list', '')
+  +tools('list')
 
 block content
   #js--content.show
@@ -30,7 +30,7 @@ block content
                     i.icon.ion-compose
                 if item.page.name != indexPage()
                   li
-                    +removePage(item.page.name, 'list')(class='confirm-delete-page btn btn-default')
+                    +removePage(item.page, 'list')(class='confirm-delete-page btn btn-default')
 
               li
                 a(href=item.page.urlForHistory(), title="Page history").btn.btn-default
