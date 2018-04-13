@@ -12,6 +12,7 @@ router.get('/search', corsEnabler, _getSearch)
 
 function _getSearch (req, res) {
   var record
+  var pages = new models.Pages()
 
   res.locals.matches = []
 
@@ -38,18 +39,12 @@ function _getSearch (req, res) {
       return
     }
 
-    models.pages.findStringAsync(res.locals.term).then(function (items) {
+    pages.findString(res.locals.term, function (err, items) {
       items.forEach(function (item) {
-        if (item.trim() !== '') {
-          record = item.split(':')
-          res.locals.matches.push({
-            pageName: path.basename(record[0].replace(/\.md$/, '')),
-            line: record[1] ? ', L' + record[1] : '',
-            text: record.slice(2).join('')
-          })
+        if (item.pageName.trim() !== '') {
+          res.locals.matches.push(item)
         }
       })
-
       renderResults()
     })
   }
