@@ -18,8 +18,14 @@ router.get('/history/*', _getHistory)
 router.get('/version/:version/*', _getWikiPage)
 router.get('/compare/:revisions/*', _getCompare)
 
+// Remove trailing '/' when searching pages
+function getPageName(req) {
+  var name = req.params[0] || ''
+  return name.replace(/\/+$/, '')
+}
+
 function _getHistory (req, res) {
-  var page = new models.Page(req.params[0])
+  var page = new models.Page(getPageName(req))
 
   page.fetch().then(function () {
     return page.fetchHistory()
@@ -69,7 +75,7 @@ function _getWiki (req, res) {
 }
 
 function _getWikiPage (req, res) {
-  var page = new models.Page(req.params[0], req.params.version)
+  var page = new models.Page(getPageName(req), req.params.version)
 
   page.fetch().then(function () {
     if (!page.error) {
@@ -114,7 +120,7 @@ function _getWikiPage (req, res) {
 function _getCompare (req, res) {
   var revisions = req.params.revisions
 
-  var page = new models.Page(req.params[0])
+  var page = new models.Page(getPageName(req))
 
   page.fetch().then(function () {
     return page.fetchRevisionsDiff(revisions)

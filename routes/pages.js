@@ -19,8 +19,14 @@ router.get('/pages/revert/:version/*', _getRevert)
 var pagesConfig = app.locals.config.get('pages')
 var proxyPath = app.locals.config.getProxyPath()
 
+// Remove trailing '/' when searching pages
+function getPageName(req) {
+  var name = req.params[0] || ''
+  return name.replace(/\/+$/, '')
+}
+
 function _deletePages (req, res) {
-  var page = new models.Page(req.params[0])
+  var page = new models.Page(getPageName(req))
 
   var redirectURL
   if (req.body && req.body.origin === 'list') {
@@ -57,9 +63,10 @@ function _getPagesNew (req, res) {
   var page
   var title = ''
 
-  if (req.params[0]) {
+  var pageName = getPageName(req)
+  if (pageName !== '') {
     // This is not perfect, unfortunately
-    title = namer.unwikify(req.params[0])
+    title = namer.unwikify(pageName)
     page = new models.Page(title)
     if (page.exists()) {
       res.redirect(page.urlForShow())
@@ -80,8 +87,8 @@ function _getPagesNew (req, res) {
 }
 
 function _postPages (req, res) {
-  var errors,
-    pageName
+  var errors
+  var pageName
 
   if (pagesConfig.title.fromFilename) {
     // pageName (from url) is not considered
@@ -139,10 +146,10 @@ function _postPages (req, res) {
 }
 
 function _putPages (req, res) {
-  var errors,
-    page
+  var errors
+  var page
 
-  page = new models.Page(req.params[0])
+  page = new models.Page(getPageName(req))
 
   req.check('pageTitle', 'The page title cannot be empty').notEmpty()
   req.check('content', 'The page content cannot be empty').notEmpty()
@@ -228,7 +235,7 @@ function _putPages (req, res) {
 }
 
 function _getPagesEdit (req, res) {
-  var page = new models.Page(req.params[0])
+  var page = new models.Page(getPageName(req))
   var warning
 
   if (!page.lock(req.user)) {
@@ -265,7 +272,7 @@ function _getPagesEdit (req, res) {
 }
 
 function _getRevert (req, res) {
-  var page = new models.Page(req.params[0], req.params.version)
+  var page = new models.Page(getPageName(req), req.params.version)
 
   page.author = req.user.asGitAuthor
 
