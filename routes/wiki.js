@@ -11,12 +11,12 @@ var proxyPath = app.locals.config.getProxyPath()
 models.use(Git)
 
 router.get('/', _getIndex)
-router.get('/wiki', _getWiki)
+router.get('/list', _getWiki)
 router.options('/wiki/:page', corsEnabler)
 router.get('/wiki/:page', corsEnabler, _getWikiPage)
-router.get('/wiki/:page/history', _getHistory)
-router.get('/wiki/:page/:version', _getWikiPage)
-router.get('/wiki/:page/compare/:revisions', _getCompare)
+router.get('/history/:page', _getHistory)
+router.get('/version/:version/:page', _getWikiPage)
+router.get('/compare/:revisions/:page', _getCompare)
 
 function _getHistory (req, res) {
   var page = new models.Page(req.params.page)

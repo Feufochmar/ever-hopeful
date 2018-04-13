@@ -11,7 +11,7 @@ mixin tools(action, page)
   ul
     if action != 'list'
       li
-        +anchor("/wiki")(title="All pages").btn.btn-sm.btn-primary
+        +anchor("/list")(title="All pages").btn.btn-sm.btn-primary
           i.icon.ion-grid
 
     if action != 'create'

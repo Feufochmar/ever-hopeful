@@ -111,8 +111,9 @@ describe('Models', function () {
         expect(m.urlForNew()).to.equal('/pages/new/chupito')
         expect(m.urlForNewWithError()).to.equal('/pages/new/chupito?e=1')
         expect(m.urlForRevert(123456)).to.equal('/pages/revert/123456/chupito')
-        expect(m.urlForHistory()).to.equal('/wiki/chupito/history')
-        expect(m.urlForCompare()).to.equal('/wiki/chupito/compare')
+        expect(m.urlForHistory()).to.equal('/history/chupito')
+        expect(m.urlForCompare("123456..123457")).to.equal('/compare/123456..123457/chupito')
+        expect(m.urlForVersion(123456)).to.equal('/version/123456/chupito')
       })
 
       it('should generate the correct url for page actions with a set proxypath', function () {
@@ -132,8 +133,9 @@ describe('Models', function () {
         expect(m.urlForNew()).to.equal('/lovely/pages/new/chupito')
         expect(m.urlForNewWithError()).to.equal('/lovely/pages/new/chupito?e=1')
         expect(m.urlForRevert(123456)).to.equal('/lovely/pages/revert/123456/chupito')
-        expect(m.urlForHistory()).to.equal('/lovely/wiki/chupito/history')
-        expect(m.urlForCompare()).to.equal('/lovely/wiki/chupito/compare')
+        expect(m.urlForHistory()).to.equal('/lovely/history/chupito')
+        expect(m.urlForCompare("123456..123457")).to.equal('/lovely/compare/123456..123457/chupito')
+        expect(m.urlForVersion(123456)).to.equal('/lovely/version/123456/chupito')
       })
     })
 

@@ -80,11 +80,11 @@
         if ($hCol1.find(':checked').length < 2) {
           return false
         }
-        window.location.href = proxyPath + '/wiki/' + $(this).data('pagename') + '/compare/' + $hCol1.find(':checked').map(function () { return $(this).val() }).toArray().reverse().join('..')
+        window.location.href = proxyPath + '/compare/' + $hCol1.find(':checked').map(function () { return $(this).val() }).toArray().reverse().join('..') + '/' + $(this).data('pagename')
         return false
       })
 
-      if (/^\/pages\/.*\/edit/.test(window.location.pathname) ||
+      if (/^\/pages\/edit\/.*/.test(window.location.pathname) ||
           /^\/pages\/new/.test(window.location.pathname)) {
         $('#js--editor').closest('form').on('submit', function () {
           if (EverHopeful.cmInstance) {
