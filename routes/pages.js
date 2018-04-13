@@ -5,6 +5,7 @@ var namer = require('../lib/namer')
 var app = require('../lib/app').getInstance()
 var models = require('../lib/models')
 var components = require('../lib/components')
+var common = require('./common')
 
 models.use(Git)
 
@@ -19,14 +20,8 @@ router.get('/pages/revert/:version/*', _getRevert)
 var pagesConfig = app.locals.config.get('pages')
 var proxyPath = app.locals.config.getProxyPath()
 
-// Remove trailing '/' when searching pages
-function getPageName(req) {
-  var name = req.params[0] || ''
-  return name.replace(/\/+$/, '')
-}
-
 function _deletePages (req, res) {
-  var page = new models.Page(getPageName(req))
+  var page = new models.Page(common.getPageName(req))
 
   var redirectURL
   if (req.body && req.body.origin === 'list') {
@@ -63,7 +58,7 @@ function _getPagesNew (req, res) {
   var page
   var title = ''
 
-  var pageName = getPageName(req)
+  var pageName = common.getPageName(req)
   if (pageName !== '') {
     // This is not perfect, unfortunately
     title = namer.unwikify(pageName)
@@ -135,13 +130,7 @@ function _postPages (req, res) {
     req.session.notice = 'The page has been created. <a href="' + page.urlForEdit() + '">Edit it again?</a>'
     res.redirect(page.urlForShow())
   }).catch(function (err) {
-    res.locals.title = '500 - Internal server error'
-    res.statusCode = 500
-    console.log(err)
-    res.render('500.pug', {
-      message: 'Sorry, something went wrong and I cannot recover. If you think this might be a bug in Ever-Hopeful, please file a detailed report about what you were doing here: https://github.com/Feufochmar/ever-hopeful/issues . Thank you!',
-      error: err
-    })
+    common.render500(res, err)
   })
 }
 
@@ -149,7 +138,7 @@ function _putPages (req, res) {
   var errors
   var page
 
-  page = new models.Page(getPageName(req))
+  page = new models.Page(common.getPageName(req))
 
   req.check('pageTitle', 'The page title cannot be empty').notEmpty()
   req.check('content', 'The page content cannot be empty').notEmpty()
@@ -210,13 +199,7 @@ function _putPages (req, res) {
       req.session.notice = 'The page has been updated. <a href="' + page.urlForEdit() + '">Edit it again?</a>'
       res.redirect(page.urlForShow())
     }).catch(function (err) {
-      res.locals.title = '500 - Internal server error'
-      res.statusCode = 500
-      console.log(err)
-      res.render('500.pug', {
-        message: 'Sorry, something went wrong and I cannot recover. If you think this might be a bug in Ever-Hopeful, please file a detailed report about what you were doing here: https://github.com/Feufochmar/ever-hopeful/issues . Thank you!',
-        error: err
-      })
+      common.render500(res, err)
     })
   }
 
@@ -235,7 +218,7 @@ function _putPages (req, res) {
 }
 
 function _getPagesEdit (req, res) {
-  var page = new models.Page(getPageName(req))
+  var page = new models.Page(common.getPageName(req))
   var warning
 
   if (!page.lock(req.user)) {
@@ -272,7 +255,7 @@ function _getPagesEdit (req, res) {
 }
 
 function _getRevert (req, res) {
-  var page = new models.Page(getPageName(req), req.params.version)
+  var page = new models.Page(common.getPageName(req), req.params.version)
 
   page.author = req.user.asGitAuthor
 
@@ -281,9 +264,7 @@ function _getRevert (req, res) {
       page.revert()
       res.redirect(page.urlForHistory())
     } else {
-      res.locals.title = '500 – Internal Server Error'
-      res.statusCode = 500
-      res.render('500.pug')
+      common.render500(res, page.error)
     }
   })
 }

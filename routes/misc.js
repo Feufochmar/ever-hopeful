@@ -3,6 +3,7 @@ var router = require('express').Router()
 var renderer = require('../lib/renderer')
 var fs = require('fs')
 var models = require('../lib/models')
+var common = require('./common')
 
 models.use(Git)
 
@@ -22,13 +23,11 @@ function _postPreview (req, res) {
 }
 
 function _getUploadForm (req, res) {
-  if (!res.locals.user) {
-    res.render('404', {
-      title: 'Modules'
-    })
-    return
+  if (res.locals.user) {
+    res.render('upload')
+  } else {
+    common.render404(res)
   }
-  res.render('upload')
 }
 
 function _getExistence (req, res) {
@@ -55,9 +54,7 @@ function _getExistence (req, res) {
 }
 
 router.all('*', function (req, res) {
-  res.locals.title = '404 - Not found'
-  res.statusCode = 404
-  res.render('404.pug')
+  common.render404(res)
 })
 
 module.exports = router
