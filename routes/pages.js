@@ -25,7 +25,7 @@ function _deletePages (req, res) {
 
   var redirectURL
   if (req.body && req.body.origin === 'list') {
-    redirectURL = proxyPath + '/wiki'
+    redirectURL = proxyPath + '/list'
   } else {
     redirectURL = proxyPath + '/'
   }
