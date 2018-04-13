@@ -9,18 +9,18 @@ var components = require('../lib/components')
 models.use(Git)
 
 router.get('/pages/new', _getPagesNew)
-router.get('/pages/new/:page', _getPagesNew)
-router.get('/pages/edit/:page', _getPagesEdit)
+router.get('/pages/new/*', _getPagesNew)
+router.get('/pages/edit/*', _getPagesEdit)
 router.post('/pages', _postPages)
-router.put('/pages/:page', _putPages)
-router.delete('/pages/:page', _deletePages)
-router.get('/pages/revert/:version/:page', _getRevert)
+router.put('/pages/*', _putPages)
+router.delete('/pages/*', _deletePages)
+router.get('/pages/revert/:version/*', _getRevert)
 
 var pagesConfig = app.locals.config.get('pages')
 var proxyPath = app.locals.config.getProxyPath()
 
 function _deletePages (req, res) {
-  var page = new models.Page(req.params.page)
+  var page = new models.Page(req.params[0])
 
   var redirectURL
   if (req.body && req.body.origin === 'list') {
@@ -57,9 +57,9 @@ function _getPagesNew (req, res) {
   var page
   var title = ''
 
-  if (req.params.page) {
+  if (req.params[0]) {
     // This is not perfect, unfortunately
-    title = namer.unwikify(req.params.page)
+    title = namer.unwikify(req.params[0])
     page = new models.Page(title)
     if (page.exists()) {
       res.redirect(page.urlForShow())
@@ -142,7 +142,7 @@ function _putPages (req, res) {
   var errors,
     page
 
-  page = new models.Page(req.params.page)
+  page = new models.Page(req.params[0])
 
   req.check('pageTitle', 'The page title cannot be empty').notEmpty()
   req.check('content', 'The page content cannot be empty').notEmpty()
@@ -228,7 +228,7 @@ function _putPages (req, res) {
 }
 
 function _getPagesEdit (req, res) {
-  var page = new models.Page(req.params.page)
+  var page = new models.Page(req.params[0])
   var warning
 
   if (!page.lock(req.user)) {
@@ -265,7 +265,7 @@ function _getPagesEdit (req, res) {
 }
 
 function _getRevert (req, res) {
-  var page = new models.Page(req.params.page, req.params.version)
+  var page = new models.Page(req.params[0], req.params.version)
 
   page.author = req.user.asGitAuthor
 

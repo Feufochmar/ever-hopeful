@@ -12,14 +12,14 @@ models.use(Git)
 
 router.get('/', _getIndex)
 router.get('/list', _getWiki)
-router.options('/wiki/:page', corsEnabler)
-router.get('/wiki/:page', corsEnabler, _getWikiPage)
-router.get('/history/:page', _getHistory)
-router.get('/version/:version/:page', _getWikiPage)
-router.get('/compare/:revisions/:page', _getCompare)
+router.options('/wiki/*', corsEnabler)
+router.get('/wiki/*', corsEnabler, _getWikiPage)
+router.get('/history/*', _getHistory)
+router.get('/version/:version/*', _getWikiPage)
+router.get('/compare/:revisions/*', _getCompare)
 
 function _getHistory (req, res) {
-  var page = new models.Page(req.params.page)
+  var page = new models.Page(req.params[0])
 
   page.fetch().then(function () {
     return page.fetchHistory()
@@ -69,7 +69,7 @@ function _getWiki (req, res) {
 }
 
 function _getWikiPage (req, res) {
-  var page = new models.Page(req.params.page, req.params.version)
+  var page = new models.Page(req.params[0], req.params.version)
 
   page.fetch().then(function () {
     if (!page.error) {
@@ -114,7 +114,7 @@ function _getWikiPage (req, res) {
 function _getCompare (req, res) {
   var revisions = req.params.revisions
 
-  var page = new models.Page(req.params.page)
+  var page = new models.Page(req.params[0])
 
   page.fetch().then(function () {
     return page.fetchRevisionsDiff(revisions)
