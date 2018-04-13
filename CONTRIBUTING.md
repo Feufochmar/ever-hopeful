@@ -4,7 +4,7 @@ Some things to keep in mind if you want to contribute.
 
 ## Document the configuration options
 
-If you add, change or remove configuration options, also update the README.md.
+If you add, change or remove configuration options, also update the CONFIGURATION.md.
 
 ## Use standardjs for formatting
 
