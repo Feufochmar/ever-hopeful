@@ -10,9 +10,7 @@ block tools
 
 block content
   #js--content.edit
-    +errors()
-    +warning()
-    +notice()
+    +notices()
     h1 Edit page
 
     form(action=page.urlForEditPut(), method='post', class='edit')

@@ -54,6 +54,8 @@ function _getWiki (req, res) {
       }
     })
 
+    common.showNotices(req, res)
+
     res.render('list', {
       items: items,
       title: 'All the pages',
@@ -78,8 +80,7 @@ function _getWikiPage (req, res) {
         res.locals.canEdit = false
       }
 
-      res.locals.notice = req.session.notice
-      delete req.session.notice
+      common.showNotices(req, res)
 
       res.render('show', {
         page: page,

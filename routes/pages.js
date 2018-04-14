@@ -69,9 +69,9 @@ function _getPagesNew (req, res) {
     }
   }
 
-  res.locals.errors = req.session.errors
+  common.showNotices(req, res)
+
   res.locals.formData = req.session.formData || {}
-  delete req.session.errors
   delete req.session.formData
 
   res.render('create', {
@@ -241,9 +241,8 @@ function _getPagesEdit (req, res) {
       }
     }
 
-    res.locals.errors = req.session.errors
+    common.showNotices(req, res)
 
-    delete req.session.errors
     delete req.session.formData
 
     res.render('edit', {

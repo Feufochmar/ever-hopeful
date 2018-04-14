@@ -5,7 +5,7 @@ include mixins/links
 
 block content
   #js--content
-
+    +notices()
     h2 Choose your authentication method
 
     if (auth.google.enabled)
@@ -28,8 +28,6 @@ block content
       p
         h4 Authenticate ldap
 
-      +errors()
-
       form.form-horizontal(action=`${proxyPath}/auth/ldap`, method='post')
         .form-group
           label.col-sm-2.control-label Username
@@ -50,8 +48,6 @@ block content
     if (auth.local.enabled)
       p
         h4 Authenticate locally
-
-      +errors()
 
       form.form-horizontal(action=`${proxyPath}/login`, method='post')
         .form-group
