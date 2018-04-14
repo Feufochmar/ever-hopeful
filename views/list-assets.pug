@@ -24,7 +24,7 @@ block content
             ul.page-actions
               if !isAnonymous()
                 li
-                  +removeAsset(item.asset)(class='confirm-delete-page btn btn-default')
+                  +removeAsset(item.asset)(class='confirm-delete-asset btn btn-default')
             .message
               |&rarr; #{item.asset.lastCommitMessage}
 

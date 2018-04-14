@@ -57,6 +57,10 @@
         return window.confirm('Do you really want to delete this page?')
       })
 
+      $('.confirm-delete-asset').on('click', function (evt) {
+        return window.confirm('Do you really want to delete this asset?')
+      })
+
       $('.confirm-revert').on('click', function (evt) {
         return window.confirm('Do you really want to revert to this revision?')
       })
