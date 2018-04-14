@@ -1,0 +1,35 @@
+extends layout
+include mixins/form
+
+block tools
+  +tools('list-assets')
+
+block content
+  #js--content.show
+    +notices()
+    h1 Asset list – Most recent updates shown first
+    ul.doc-list
+      each item in items
+        li
+          h4
+            a(href=item.asset.urlForShow()) #{item.asset.wikiname}
+          div.content.clearfix
+            .meta
+              |Last update by&nbsp;
+              b
+                +author(item.asset.metadata.author, item.asset.metadata.email)
+                |,&nbsp;
+              b.date(title=item.asset.metadata.date) #{item.asset.metadata.relDate}
+              |&nbsp;&ndash;&nbsp;#{item.asset.metadata.hash}
+            ul.page-actions
+              if !isAnonymous()
+                li
+                  +removeAsset(item.asset)(class='confirm-delete-page btn btn-default')
+            .message
+              |&rarr; #{item.asset.lastCommitMessage}
+
+    ul.paginator
+      each pageNumber in pageNumbers
+        - var klass = pageNumber == pageCurrent ? 'current' : ''
+        li(class=klass)
+          a(href=`?page=${pageNumber}`) #{pageNumber}

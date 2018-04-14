@@ -14,8 +14,6 @@ var uploadDirectory = app.locals.config.get('application').repository + '/' + up
 var upload = multer({ dest: uploadDirectory + '/' })
 
 // Routes
-// Upload directory: serve the files
-router.use('/uploads', express.static(uploadDirectory))
 router.post('/uploadFile', upload.single('wiki_file'), _uploadFile)
 
 function _uploadFile(req, res, next) {
@@ -32,7 +30,7 @@ function _uploadFile(req, res, next) {
   asset.author = req.user.asGitAuthor
 
   asset.save(req.file.path, req.body.file_message).then(function () {
-    res.render('upload_status', {message: 'File uploaded to: <pre>' + asset.urlForShow() + '</pre>'})
+    res.render('upload_status', {message: 'File uploaded to: <pre>' + asset.urlForDisplay() + '</pre>'})
   }).catch(function (err) {
     res.render('upload_status', {message: 'Error: ' + err})
   })
