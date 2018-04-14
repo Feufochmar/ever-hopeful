@@ -13,6 +13,16 @@ block content
 
     img(src=asset.urlForDisplay())
 
+    h2 Rename this asset
+
+    form(action=asset.urlForMove(), method='post', class='edit')
+      .form-group
+        input.form-control(required, type='text', placeholder='Enter the asset name', name='assetName', value=asset.wikiname)
+        input(type='hidden', name='_method', value='put')
+
+      input.btn.btn-primary(type='submit', value='Rename')
+
+
   p(class=klass) Updated by&nbsp;
     b
       +author(asset.metadata.author, asset.metadata.email)

@@ -21,9 +21,8 @@ router.use('/uploads', express.static(assetDirectory))
 router.get('/assets/list', _listAssets)
 router.delete('/assets/*', _deleteAsset)
 router.get('/assets/show/*', _showAsset)
+router.put('/assets/*', _moveAsset)
 
-// TODO: move/rename asset
-// router.put('/assets/*', _moveAsset)
 // TODO: revert asset
 // router.put('/assets/revert/:version/*', _revertAsset)
 
@@ -82,6 +81,20 @@ function _showAsset (req, res) {
       asset: asset
     })
   })
+}
+
+function _moveAsset (req, res) {
+  var asset = new assets.Asset(common.getAssetName(req))
+
+  asset.author = req.user.asGitAuthor
+  asset.renameTo(req.body.assetName)
+    .then(function () {
+      res.redirect(asset.urlForShow())
+    }).catch(function (ex) {
+      console.log(ex)
+      req.session.errors = [{msg: 'Cannot rename file to ' + req.body.assetName}]
+      res.redirect(asset.urlForShow())
+    })
 }
 
 module.exports = router
