@@ -73,8 +73,8 @@
   },
   "scripts": {
     "test": "node_modules/.bin/mocha test/spec",
-    "start": "./ever-hopeful -c config.yaml",
-    "start-dev": "nodemon ./ever-hopeful -c config.yaml"
+    "start": "NODE_ENV=production ./ever-hopeful -c config.yaml",
+    "start-dev": "NODE_ENV=development nodemon ./ever-hopeful -c config.yaml"
   },
   "engines": {
     "node": ">=0.8",
