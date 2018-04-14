@@ -20,7 +20,7 @@ router.use('/uploads', express.static(assetDirectory))
 // Asset management routes
 router.get('/assets/list', _listAssets)
 router.delete('/assets/*', _deleteAsset)
-//router.get('/assets/show/*', _showAsset)
+router.get('/assets/show/*', _showAsset)
 
 // TODO: move/rename asset
 // router.put('/assets/*', _moveAsset)
@@ -68,6 +68,19 @@ function _deleteAsset (req, res) {
   asset.remove().then(function () {
     req.session.notice = 'The asset `' + asset.wikiname + '` has been deleted.'
     res.redirect(redirectURL)
+  })
+}
+
+function _showAsset (req, res) {
+  var asset = new assets.Asset(common.getAssetName(req))
+
+  common.showNotices(req, res)
+
+  asset.fetch(false).then(function () {
+    res.render('show-asset', {
+      title: asset.wikiname,
+      asset: asset
+    })
   })
 }
 

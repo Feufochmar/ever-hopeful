@@ -43,6 +43,11 @@ mixin tools(action, page)
         li
           +removePage(page, 'tools')(class='confirm-delete-page btn btn-sm btn-primary')
 
+    if (action == 'show-asset')
+      if !isAnonymous()
+        li
+          +removeAsset(asset)(class='confirm-delete-asset btn btn-sm btn-primary')
+
     if action == 'show'
       li
         +anchor(page.urlForHistory())(title="Page history").btn.btn-sm.btn-primary

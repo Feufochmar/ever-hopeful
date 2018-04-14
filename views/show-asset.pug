@@ -1,0 +1,21 @@
+extends layout
+
+include mixins/form
+
+block tools
+  +tools('show-asset', asset)
+
+block content
+
+  #js--content.show
+    +notices()
+    h1 #{asset.wikiname}
+
+    img(src=asset.urlForDisplay())
+
+  p(class=klass) Updated by&nbsp;
+    b
+      +author(asset.metadata.author, asset.metadata.email)
+    |,&nbsp;
+    b(title=asset.metadata.date) #{asset.metadata.relDate}&nbsp;
+    | &ndash; #{asset.metadata.hash}
