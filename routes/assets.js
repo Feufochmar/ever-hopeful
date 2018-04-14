@@ -23,9 +23,6 @@ router.delete('/assets/*', _deleteAsset)
 router.get('/assets/show/*', _showAsset)
 router.put('/assets/*', _moveAsset)
 
-// TODO: revert asset
-// router.put('/assets/revert/:version/*', _revertAsset)
-
 function _listAssets (req, res) {
   var items = []
   var pagen = 0 | req.query.page
