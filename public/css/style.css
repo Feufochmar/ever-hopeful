@@ -205,8 +205,8 @@ hr {
 }
 
 .compare {
-  font-family: Consolas, monospace;
-  font-size: 12px;
+  font-family: "Ubuntu Mono", Consolas, monospace;
+  font-size: 13px;
 }
 
 .compare td {
