@@ -109,6 +109,7 @@ The authentication is mandatory to edit pages from the web interface, but ever-h
 - There is one authorization level only (no "administrators" and "editors")
 - No scheduled pull or fetch from the remote is provided (because handling conflicts would be a bit too... _interesting_)
 - There is no removal of empty directories after a page is moved.
+- Links to page names with non-ascii characters may be hidden on the "All pages" page. Use the command `git config core.quotepath off` on the wiki repository to fix this.
 
 Please note that at the moment it is quite "risky" to have someone else, other than ever-hopeful itself, have write access to the remote / branch ever-hopeful is pushing to. The push operation is supposed to always be successfull and there is no pull or fetch. You can of course manage to handle pull requests yourself.
 
