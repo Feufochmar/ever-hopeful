@@ -9,7 +9,6 @@ models.use(Git)
 
 router.get('/misc/syntax-reference', _getSyntaxReference)
 router.post('/misc/preview', _postPreview)
-router.get('/misc/existence', _getExistence)
 router.get('/misc/upload', _getUploadForm)
 
 function _getSyntaxReference (req, res) {
@@ -28,29 +27,6 @@ function _getUploadForm (req, res) {
   } else {
     common.render404(res)
   }
-}
-
-function _getExistence (req, res) {
-  if (!req.query.data) {
-    res.send(JSON.stringify({data: []}))
-    return
-  }
-
-  var result = []
-  var page
-  var n = req.query.data.length
-
-  req.query.data.forEach(function (pageName, idx) {
-    (function (name, index) {
-      page = new models.Page(name)
-      if (!fs.existsSync(page.pathname)) {
-        result.push(name)
-      }
-      if (index === (n - 1)) {
-        res.send(JSON.stringify({data: result}))
-      }
-    }(pageName, idx))
-  })
 }
 
 router.all('*', function (req, res) {

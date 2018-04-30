@@ -107,10 +107,6 @@
         }
       }
 
-      if (/^\/wiki\//.test(window.location.pathname)) {
-        markMissingPagesAsAbsent('#js--content')
-      }
-
       function toggleCompareCheckboxes () {
         $('#js--rev-compare').attr('disabled', true)
 
@@ -140,7 +136,6 @@
       $('#js--preview').modal({keyboard: true, show: true, backdrop: false})
       $.post(proxyPath + '/misc/preview', {data: $('#js--editor').val()}, function (data) {
         $('#js--preview .modal-body').html(data).get(0).scrollTop = 0
-        markMissingPagesAsAbsent('#js--preview .modal-body')
       })
     },
 
@@ -189,27 +184,6 @@
         cheatsheetShown = true
       }
     }
-  }
-
-  function markMissingPagesAsAbsent (selector) {
-    var pages = []
-    var match
-    var href
-
-    $(selector + ' a.internal').each(function (i, a) {
-      href = $(a).attr('href')
-      href = href.slice(proxyPath.length)
-      match = /\/wiki\/(.+)/.exec(href)
-      if (match) {
-        pages.push(decodeURIComponent(match[1]))
-      }
-    })
-
-    $.getJSON(proxyPath + '/misc/existence', {data: pages}, function (result) {
-      $.each(result.data, function (href, a) {
-        $(selector + " a[href='" + proxyPath.split('/').join('\\/') + '\\/wiki\\/' + encodeURIComponent(a) + "']").addClass('absent')
-      })
-    })
   }
 
   window.EverHopeful = EverHopeful
