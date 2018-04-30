@@ -85,7 +85,8 @@ function _getWikiPage (req, res) {
       res.render('show', {
         page: page,
         title: app.locals.config.get('application').title + ' – ' + page.title,
-        content: renderer.render('# ' + page.title + '\n' + page.content)
+        paths: renderer.render(page.getPaths()),
+        content: renderer.render('# ' + page.shortTitle + '\n' + page.content)
       })
     } else {
       if (req.user) {

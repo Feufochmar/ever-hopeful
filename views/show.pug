@@ -9,6 +9,9 @@ block content
 
   if !isAjax
     #js--content.show
+      .location
+        |>&nbsp;
+        !=paths
       +notices()
       !=content
   else
