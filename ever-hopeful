@@ -22,7 +22,7 @@ global.Git = require('./lib/gitmech')
 
 program.version(pkg.version)
        .option('-c, --config <path>', 'Specify the config file')
-       .option('-#, --hash-string <string>', 'Create an hash for a string')
+       .option('-#, --hash-string <string>', 'Create an hash for a string. Configuration should be provided.')
        .option('-l, --local', 'Listen on localhost only')
        .option('-s, --sample-config', 'Dumps a config file template and exits')
        .parse(process.argv)
