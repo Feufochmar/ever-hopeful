@@ -11,18 +11,19 @@ const {check, validationResult} = require('express-validator')
 models.use(Git)
 
 // Validation
-const _pageValidator = [
-  // Title may not be empty
+const _pageCreateValidator = [
   check('pageTitle', 'The page title cannot be empty').exists().trim().isLength({min: 1}),
   check('content', 'The page content cannot be empty').exists().trim().isLength({min: 1}),
-  check('message', 'Change message must be present.').exists().trim(),
 ]
+const _pageUpdateValidator = _pageCreateValidator.concat([
+  check('message', 'Change message must be present.').exists().trim()
+])
 //
 router.get('/pages/new', _getPagesNew)
 router.get('/pages/new/*', _getPagesNew)
 router.get('/pages/edit/*', _getPagesEdit)
-router.post('/pages', _pageValidator, _postPages)
-router.put('/pages/*', _pageValidator, _putPages)
+router.post('/pages', _pageCreateValidator, _postPages)
+router.put('/pages/*', _pageUpdateValidator, _putPages)
 router.delete('/pages/*', _deletePages)
 router.get('/pages/revert/:version/*', _getRevert)
 
