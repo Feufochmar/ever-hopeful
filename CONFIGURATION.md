@@ -59,10 +59,6 @@
 
   Please note that ever-hopeful won't work correctly if this option is activated.
 
-#### authentication.staticWhitelist (string: "/\\.png$/i, /\\.jpg$/i, /\\.gif$/i")
-
-  This is to enable ever-hopeful to serve any kind of static file (like images) from the repository. By default, Ever-Hopeful will serve `*.md` files and `*.jpg, *.png, *.gif`. Provide the values as a comma separated list of regular expressions.
-
 #### authentication.google.enabled (boolean: true)
 
   Enable or disable authentication via Google logins.

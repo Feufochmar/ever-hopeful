@@ -39,7 +39,6 @@
     "body-parser": "^1.10.0",
     "commander": "^5.0.0",
     "cors": "^2.7.1",
-    "ecstatic": "^4.1.2",
     "express": "^4.10.6",
     "express-flash": "0.0.2",
     "express-session": "^1.9.3",

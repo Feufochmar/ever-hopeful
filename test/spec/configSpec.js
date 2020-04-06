@@ -29,9 +29,7 @@ describe('Config', function () {
     expect(def.application.git).to.equal('git')
     expect(def.application.skipGitCheck).to.be.false
     expect(def.application.loggingMode).to.equal(1)
-    expect(def.application.pedanticMarkdown).to.be.true
     expect(def.application.gfmBreaks).to.be.true
-    expect(def.application.staticWhitelist).to.equal('/\\.png$/i, /\\.jpg$/i, /\\.gif$/i')
     expect(def.application.proxyPath).to.equal('')
 
     expect(def.server.hostname).to.equal('localhost')

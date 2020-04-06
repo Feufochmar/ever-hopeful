@@ -49,9 +49,9 @@ For code syntax highlighting, Ever-Hopeful uses the `node-syntaxhighlighter` mod
 
 ## Installation
 
-Download/clone the whole thing and run `yarn install`.
+Download/clone the whole thing and run `npm install`.
 
-Note: if you already have Ever-Hopeful installed, please also run `yarn prune` (some modules can be stale and need to be removed).
+Note: if you already have Ever-Hopeful installed, please also run `npm prune` (some modules can be stale and need to be removed).
 
 Ever-Hopeful needs a config file and to create a sample config file, just run `ever-hopeful -s`, redirect the output on a file and then edit it (`ever-hopeful -s > config.yaml`). The config file contains all the available configuration options. Be sure to provide a valid server hostname (like wiki.mycompany.com) if you use a 3rd party provider for authentication (like Google or GitHub). It is needed for them to be able to get back to you.
 
@@ -143,9 +143,8 @@ The above tag will link to `Ever-Hopeful Works/More.md` using "How Ever-Hopeful 
 
 ## Images
 
-If you put images into the repository, Ever-Hopeful will be able to serve them. You can enable Ever-Hopeful to serve even other file types from the document directory: you need to change the `staticWhitelist` configuration option.
-
-You can also upload images with ever-hopeful. Those will be placed in an upload directory.
+Image, or other assets must be placed in the upload subdirectory to be served by Ever-Hopeful.
+You can manage them (upload, rename, remove) directly from the wiki.
 
 ## Configuration options
 
