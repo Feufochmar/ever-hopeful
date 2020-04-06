@@ -49,12 +49,6 @@
 
   Specifies how verbose the http logging should be. Accepts numeric values: `0` for no logging at all, `1` for the a combined log and `2` for a coincise, coloured log (good for development).
 
-#### application.pedanticMarkdown (boolean: true)
-
-  The markdown module we use (Marked) tries to overcome some "obscure" problems with the original Perl markdown parser by default. This produces some problems when rendering HTML embedded in a markdown document (see also issue https://github.com/claudioc/jingo/issues/48). By default we now want to use the original parser and not the modified one (pedantic: true).
-
-  With this option you can revert this decision if for some reason your documents are not rendered how you like.
-
 #### application.gfmBreaks (boolean: true)
 
   Enable [GFM line breaks](https://help.github.com/articles/github-flavored-markdown#newlines)
