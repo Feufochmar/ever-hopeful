@@ -6,14 +6,23 @@ var app = require('../lib/app').getInstance()
 var models = require('../lib/models')
 var components = require('../lib/components')
 var common = require('./common')
+const {check, validationResult} = require('express-validator')
 
 models.use(Git)
 
+// Validation
+const _pageValidator = [
+  // Title may not be empty
+  check('pageTitle', 'The page title cannot be empty').exists().trim().isLength({min: 1}),
+  check('content', 'The page content cannot be empty').exists().trim().isLength({min: 1}),
+  check('message', 'Change message must be present.').exists().trim(),
+]
+//
 router.get('/pages/new', _getPagesNew)
 router.get('/pages/new/*', _getPagesNew)
 router.get('/pages/edit/*', _getPagesEdit)
-router.post('/pages', _postPages)
-router.put('/pages/*', _putPages)
+router.post('/pages', _pageValidator, _postPages)
+router.put('/pages/*', _pageValidator, _putPages)
 router.delete('/pages/*', _deletePages)
 router.get('/pages/revert/:version/*', _getRevert)
 
@@ -82,9 +91,8 @@ function _getPagesNew (req, res) {
 }
 
 function _postPages (req, res) {
-  var errors
+  // TODO: as pageTitle has not be validated yet, there may be problems in the redirect below
   var pageName
-
   if (pagesConfig.title.fromFilename) {
     // pageName (from url) is not considered
     pageName = req.body.pageTitle
@@ -92,16 +100,12 @@ function _postPages (req, res) {
     // pageName (from url) is more important
     pageName = (namer.unwikify(req.body.pageName) || req.body.pageTitle)
   }
-
   var page = new models.Page(pageName)
 
-  req.check('pageTitle', 'The page title cannot be empty').notEmpty()
-  req.check('content', 'The page content cannot be empty').notEmpty()
+  const errors = validationResult(req);
 
-  errors = req.validationErrors()
-
-  if (errors) {
-    req.session.errors = errors
+  if (!errors.isEmpty()) {
+    req.session.errors = errors.array()
     // If the req.body is too big, the cookie session-store will crash,
     // logging out the user. For this reason we use the sessionStorage
     // on the client to save the body when submitting
@@ -112,9 +116,6 @@ function _postPages (req, res) {
     res.redirect(page.urlForNewWithError())
     return
   }
-
-  req.sanitize('pageTitle').trim()
-  req.sanitize('content').trim()
 
   if (page.exists()) {
     req.session.errors = [{msg: 'A document with this title already exists'}]
@@ -135,17 +136,10 @@ function _postPages (req, res) {
 }
 
 function _putPages (req, res) {
-  var errors
-  var page
+  const page = new models.Page(common.getPageName(req))
 
-  page = new models.Page(common.getPageName(req))
-
-  req.check('pageTitle', 'The page title cannot be empty').notEmpty()
-  req.check('content', 'The page content cannot be empty').notEmpty()
-
-  errors = req.validationErrors()
-
-  if (errors) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
     fixErrors()
     return
   }
@@ -156,10 +150,6 @@ function _putPages (req, res) {
     res.redirect(proxyPath + '/')
     return
   }
-
-  req.sanitize('pageTitle').trim()
-  req.sanitize('content').trim()
-  req.sanitize('message').trim()
 
   page.author = req.user.asGitAuthor
 
@@ -204,7 +194,7 @@ function _putPages (req, res) {
   }
 
   function fixErrors () {
-    req.session.errors = errors
+    req.session.errors = errors.array()
     // If the req.body is too big, the cookie session-store will crash,
     // logging out the user. For this reason we use the sessionStorage
     // on the client to save the body when submitting
