@@ -128,16 +128,11 @@
 
 #### authentication.local.[accounts].email
 
-  If you want to use Gravatar, provide your gravatar email here.
-
-#### features.gravatar (boolean: true)
-
-  Whether to enable gravatar support or not.
+  Email used in git commits.
 
 #### features.useProfileUrl (boolean: false)
 
   If set to true, the URL of the user's profile is used as the email of git commits, and are used to display a link to the author.
-  This option is not compatible with gravatar support.
 
 #### server.hostname
 

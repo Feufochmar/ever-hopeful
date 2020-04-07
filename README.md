@@ -32,7 +32,6 @@ This project started as a fork of [Jingo](https://github.com/claudioc/jingo) v1.
 - Paginated list of all the pages, with a quick way to find changes between revisions
 - Search through the content _and_ the page names
 - Page layout accepts custom sidebar and footer
-- Gravatar support
 - Generate Table of Contents for pages
 - Can use custom CSS and JavaScript scripts
 - White list for authorization on page reading and writing
