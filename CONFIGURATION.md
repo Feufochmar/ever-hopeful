@@ -66,7 +66,7 @@
 #### authentication.google.clientId
 #### authentication.google.clientSecret
 
-  Values required for Google OAuth2 authentication. Refer to a previous section of this document on how to set them up.
+  Values required for Google OAuth2 authentication.
 
 #### authentication.google.redirectUrl (string: /oauth2callback)
 
@@ -79,7 +79,7 @@
 #### authentication.github.clientId
 #### authentication.github.clientSecret
 
-  Values required for GitHub OAuth2 authentication. Refer to a previous section of this document on how to set them up.
+  Values required for GitHub OAuth2 authentication.
 
 #### authentication.github.redirectUrl (string: /auth/github/callback)
 
@@ -92,7 +92,12 @@
 #### authentication.mastodon.clientId
 #### authentication.mastodon.clientSecret
 
-  Values required for Mastodon OAuth2 authentication. Refer to a previous section of this document on how to set them up.
+  Values required for Mastodon OAuth2 authentication.
+  You can register an application to get those values with curl
+  (replace `<wiki.domain>` with the address of the wiki and `<mastodon.instance.domain>` with the instance against you register).
+  ```
+    curl -X POST -d "client_name=Wiki&redirect_uris=https://<wiki.domain>/auth/mastodon/callback&scopes=read&website=https://<wiki.domain>" https://<mastodon.instance.domain>/api/v1/apps
+  ```
 
 #### authentication.mastodon.domain
 
