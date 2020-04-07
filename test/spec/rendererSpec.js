@@ -6,6 +6,7 @@ var namer = require('../../lib/namer')
 
 describe('Renderer', function () {
   // To have the right configuration in namer
+  // Note: the class is "absent" as there are no page with the tested names
   beforeEach(function () {
     namer.configOverride({
       pages: {
@@ -19,57 +20,57 @@ describe('Renderer', function () {
 
   it('should render bracket tags1', function () {
     var text = 'a [[Foo]] b'
-    expect(Renderer.render(text)).to.be.equal('<p>a <a class="internal" href="/wiki/Foo">Foo</a> b</p>\n')
+    expect(Renderer.render(text)).to.be.equal('<p>a <a class="absent" href="/wiki/Foo">Foo</a> b</p>\n')
   })
 
   it('should render bracket tags2', function () {
     var text = 'a [[Foo]][[Foo]][[Foo]] b'
-    expect(Renderer.render(text)).to.be.equal('<p>a <a class="internal" href="/wiki/Foo">Foo</a><a class="internal" href="/wiki/Foo">Foo</a><a class="internal" href="/wiki/Foo">Foo</a> b</p>\n')
+    expect(Renderer.render(text)).to.be.equal('<p>a <a class="absent" href="/wiki/Foo">Foo</a><a class="absent" href="/wiki/Foo">Foo</a><a class="absent" href="/wiki/Foo">Foo</a> b</p>\n')
   })
 
   it('should render bracket tags3', function () {
     var text = 'a [[Foo Bar]] b'
-    expect(Renderer.render(text)).to.be.equal('<p>a <a class="internal" href="/wiki/Foo-Bar">Foo Bar</a> b</p>\n')
+    expect(Renderer.render(text)).to.be.equal('<p>a <a class="absent" href="/wiki/Foo%20Bar">Foo Bar</a> b</p>\n')
   })
 
   it('should render bracket tags4', function () {
     var text = 'a [[Foo]][[Bar]] b'
-    expect(Renderer.render(text)).to.be.equal('<p>a <a class="internal" href="/wiki/Foo">Foo</a><a class="internal" href="/wiki/Bar">Bar</a> b</p>\n')
+    expect(Renderer.render(text)).to.be.equal('<p>a <a class="absent" href="/wiki/Foo">Foo</a><a class="absent" href="/wiki/Bar">Bar</a> b</p>\n')
   })
 
   it('should render bracket tags5', function () {
     var text = 'a [[Foo]] [[Bar]] b'
-    expect(Renderer.render(text)).to.be.equal('<p>a <a class="internal" href="/wiki/Foo">Foo</a> <a class="internal" href="/wiki/Bar">Bar</a> b</p>\n')
+    expect(Renderer.render(text)).to.be.equal('<p>a <a class="absent" href="/wiki/Foo">Foo</a> <a class="absent" href="/wiki/Bar">Bar</a> b</p>\n')
   })
 
   it('should render bracket tags6', function () {
     var text = 'a [[Il marito di Foo|Foobar]] [[Bar]] b'
-    expect(Renderer.render(text)).to.be.equal('<p>a <a class="internal" href="/wiki/Foobar">Il marito di Foo</a> <a class="internal" href="/wiki/Bar">Bar</a> b</p>\n')
+    expect(Renderer.render(text)).to.be.equal('<p>a <a class="absent" href="/wiki/Foobar">Il marito di Foo</a> <a class="absent" href="/wiki/Bar">Bar</a> b</p>\n')
   })
 
   it('should render bracket tags7', function () {
     var text = 'a [[Foo / Bar]] b'
-    expect(Renderer.render(text)).to.be.equal('<p>a <a class="internal" href="/wiki/Foo-%2B-Bar">Foo / Bar</a> b</p>\n')
+    expect(Renderer.render(text)).to.be.equal('<p>a <a class="absent" href="/wiki/Foo%20/%20Bar">Foo &#x2F; Bar</a> b</p>\n')
   })
 
   it('should render bracket tags8', function () {
     var text = '[[Foo]], [[Bar]]'
-    expect(Renderer.render(text)).to.be.equal('<p><a class="internal" href="/wiki/Foo">Foo</a>, <a class="internal" href="/wiki/Bar">Bar</a></p>\n')
+    expect(Renderer.render(text)).to.be.equal('<p><a class="absent" href="/wiki/Foo">Foo</a>, <a class="absent" href="/wiki/Bar">Bar</a></p>\n')
   })
 
   it('should render bold bracket tags', function () {
     var text = 'foo **[[Bar]]** buzz'
-    expect(Renderer.render(text)).to.be.equal('<p>foo <strong><a class="internal" href="/wiki/Bar">Bar</a></strong> buzz</p>\n')
+    expect(Renderer.render(text)).to.be.equal('<p>foo <strong><a class="absent" href="/wiki/Bar">Bar</a></strong> buzz</p>\n')
   })
 
   it('should render italic bracket tags', function () {
     var text = 'foo *[[Bar]]* buzz'
-    expect(Renderer.render(text)).to.be.equal('<p>foo <em><a class="internal" href="/wiki/Bar">Bar</a></em> buzz</p>\n')
+    expect(Renderer.render(text)).to.be.equal('<p>foo <em><a class="absent" href="/wiki/Bar">Bar</a></em> buzz</p>\n')
   })
 
   it('should render italic bold bracket tags', function () {
     var text = 'foo ***[[Bar]]*** buzz'
-    expect(Renderer.render(text)).to.be.equal('<p>foo <strong><em><a class="internal" href="/wiki/Bar">Bar</a></em></strong> buzz</p>\n')
+    expect(Renderer.render(text)).to.be.equal('<p>foo <strong><em><a class="absent" href="/wiki/Bar">Bar</a></em></strong> buzz</p>\n')
   })
 
   it('should replace {{TOC}} with the table of contents', function () {

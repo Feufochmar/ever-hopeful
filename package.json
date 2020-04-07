@@ -79,5 +79,12 @@
     "node": ">=10.12",
     "npm": ">=1.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "mocha": {
+    "reporter": "spec",
+    "require": "test/support/setup",
+    "check-leaks": true,
+    "recursive": true,
+    "globals": "strNew"
+  }
 }
